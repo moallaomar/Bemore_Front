@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component ({
-    templateUrl: 'basic-table.html'
+    templateUrl: 'add-quiz.html'
 })
 
-export class BasicTableComponent {
+export class AddQuizComponent {
     constructor() { }
 }

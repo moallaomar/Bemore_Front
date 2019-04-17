@@ -21,8 +21,8 @@ export const AppRoutes: Routes = [
             },
 
             {
-                path: 'tables',
-                loadChildren: './tables/tables.modules#TablesModule'
+                path: 'quiz',
+                loadChildren: './quiz/quiz.modules#QuizModule'
             }
         ]
     },
