@@ -21,6 +21,7 @@ import {LoginModule} from './login/login.module';
 import {AuthenticationService} from './Service/authentication.service';
 import {QuestionService} from './Service/question.service';
 import {AuthInterceptor} from './Service/auth.interceptor';
+import {QuizService} from "./Service/quiz.service";
 
 @NgModule({
     imports: [
@@ -38,7 +39,7 @@ import {AuthInterceptor} from './Service/auth.interceptor';
         AuthenticationLayoutComponent,
         Sidebar_Directives
     ],
-    providers: [AuthenticationService, QuestionService,
+    providers: [AuthenticationService, QuestionService,QuizService,
       {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,

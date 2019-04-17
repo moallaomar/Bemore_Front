@@ -30,24 +30,21 @@
                 <span class="title">Exam</span>
               </a>
             </li>
-            <li class="nav-item dropdown" routerLinkActive="open">
-              <a class="dropdown-toggle" href="javascript:void(0);" >
+            <li clas="nav-item" routerLinkActive="active">
+              <a *ngIf="isAdmin()"  class="mrg-top-30" href="" [routerLink]="['/quiz/add-quiz']">
                                 <span class="icon-holder">
-                                    <i class="ti-layout-media-overlay"></i>
+                                    <i class="ti-file"></i>
                                 </span>
-                <span class="title">Quiz</span>
-                <span class="arrow">
-                                    <i class="ti-angle-right"></i>
-                                </span>
+                <span class="title">Ajouter un test</span>
               </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="" [routerLink]="['/quiz/add-quiz']">Créer un Quiz</a>
-                </li>
-                <li>
-                  <a href="" [routerLink]="['/quiz/manage-quiz']">Gerer les Quiz</a>
-                </li>
-              </ul>
+            </li>
+            <li clas="nav-item" routerLinkActive="active">
+              <a *ngIf="isAdmin()"  class="mrg-top-30" href="" [routerLink]="['/quiz/manage-quiz']">
+                                <span class="icon-holder">
+                                    <i class="ti-slice"></i>
+                                </span>
+                <span class="title">Gerer les exams</span>
+              </a>
             </li>
 
 
@@ -78,7 +75,7 @@
 
                   <img class="profile-img img-fluid" src="assets/images/avatars/user-1.jpg" alt="profil_picture">
                   <div class="user-info">
-                    <span class="name pdd-right-5" *ngIf="dataLoaded == 1"> Hello {{username}} </span>
+                    <span class="name pdd-right-5" *ngIf="dataLoaded == 1"> Bonjour {{username}} </span>
                     <i class="ti-angle-down font-size-10"></i>
                   </div>
                 </a>
