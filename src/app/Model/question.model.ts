@@ -2,9 +2,8 @@ import {Answer} from "./answer.model";
 
 export class Question {
 
-  constructor() {
 
-  }
+  constructor(){}
 
 id:number;
   content: string;

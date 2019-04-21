@@ -9,6 +9,9 @@ import {CommonModule} from "@angular/common";
 import {NgSelectizeModule} from "ng-selectize";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ArchwizardModule} from "angular-archwizard";
+import {Ng2SmartTableModule} from "ng2-smart-table";
+import {ModalComponent} from "./add-quiz/modal/modal.component";
+import {BrowserModule} from "@angular/platform-browser";
 
 
 @NgModule({
@@ -20,12 +23,16 @@ import {ArchwizardModule} from "angular-archwizard";
     ArchwizardModule,
     NgSelectizeModule,
     NgbModule,
+    Ng2SmartTableModule,
     CustomFormsModule
   ],
   declarations: [
     AddQuizComponent,
-    ManageQuizComponent
-  ]
+    ManageQuizComponent,
+    ModalComponent
+  ],
+  bootstrap:    [ AddQuizComponent],
+
 })
 export class QuizModule {
 }

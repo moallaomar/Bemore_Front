@@ -15,8 +15,16 @@ export class QuizService {
   createQuiz(quiz:Quiz){
 
     return this.http.post<Quiz>(this.host2+'/quiz', quiz)
-
   }
+  getLastQuiz(){
+    return this.http.get<Quiz>(this.host2+'/lastquiz');
+  }
+
+  isQuizName(name:string){
+    return this.http.get<string>(this.host2+'/isquizname/'+name);
+  }
+
+
 
 
 

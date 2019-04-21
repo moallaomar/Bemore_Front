@@ -1,11 +1,14 @@
+import {Question} from "./question.model";
+
 export class Quiz {
 
 
   constructor() {
   }
-
-  private Name:number
-  private Description:String;
+id:number
+  Name:number
+   Description:String;
+  questions:Question[];
 
 
 }

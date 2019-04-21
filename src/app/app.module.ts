@@ -22,6 +22,9 @@ import {AuthenticationService} from './Service/authentication.service';
 import {QuestionService} from './Service/question.service';
 import {AuthInterceptor} from './Service/auth.interceptor';
 import {QuizService} from "./Service/quiz.service";
+import { ModalComponent } from './quiz/add-quiz/modal/modal.component';
+import {QuizModule} from "./quiz/quiz.modules";
+import {AddQuizComponent} from "./quiz/add-quiz/add-quiz.component";
 
 @NgModule({
     imports: [
@@ -32,12 +35,13 @@ import {QuizService} from "./Service/quiz.service";
         PerfectScrollbarModule,
       HttpClientModule,
       LoginModule,
+      QuizModule,
     ],
     declarations: [
         AppComponent,
         CommonLayoutComponent,
         AuthenticationLayoutComponent,
-        Sidebar_Directives
+        Sidebar_Directives,
     ],
     providers: [AuthenticationService, QuestionService,QuizService,
       {
@@ -45,7 +49,8 @@ import {QuizService} from "./Service/quiz.service";
         useClass: AuthInterceptor,
         multi: true
       }, ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+  entryComponents: [ AddQuizComponent , ModalComponent ],
 })
 
 
