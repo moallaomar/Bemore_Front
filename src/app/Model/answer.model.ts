@@ -2,14 +2,11 @@ import {Question} from "./question.model";
 
 export class Answer {
 
-
-  constructor(data:any) {
-this.id = data.id;
-this.content = data.content;
-this.correct = data.correct;
+  constructor() {
   }
-    id:number;
+
+  id: number;
   content: string;
-  correct: boolean;
+  correct: Boolean;
 }
 

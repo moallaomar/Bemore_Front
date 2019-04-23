@@ -22,9 +22,10 @@ import {AuthenticationService} from './Service/authentication.service';
 import {QuestionService} from './Service/question.service';
 import {AuthInterceptor} from './Service/auth.interceptor';
 import {QuizService} from "./Service/quiz.service";
-import { ModalComponent } from './quiz/add-quiz/modal/modal.component';
 import {QuizModule} from "./quiz/quiz.modules";
 import {AddQuizComponent} from "./quiz/add-quiz/add-quiz.component";
+import {AnswerService} from "./Service/answer.service";
+import { AddAnswerComponent } from './quiz/add-answer/add-answer.component';
 
 @NgModule({
     imports: [
@@ -43,14 +44,13 @@ import {AddQuizComponent} from "./quiz/add-quiz/add-quiz.component";
         AuthenticationLayoutComponent,
         Sidebar_Directives,
     ],
-    providers: [AuthenticationService, QuestionService,QuizService,
+    providers: [AuthenticationService, QuestionService,QuizService, AnswerService,
       {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,
         multi: true
       }, ],
     bootstrap: [AppComponent],
-  entryComponents: [ AddQuizComponent , ModalComponent ],
 })
 
 

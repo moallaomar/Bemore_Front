@@ -1,7 +1,8 @@
 import {Routes} from '@angular/router';
-//Tables Components
+
 import {AddQuizComponent} from './add-quiz/add-quiz.component';
-import {ManageQuizComponent} from './manage-quiz/manage-quiz.component';
+import {AddQuestionComponent} from "./add-question/add-question.component";
+import {AddAnswerComponent} from "./add-answer/add-answer.component";
 
 export const QuizRoutes: Routes = [
   {
@@ -15,12 +16,20 @@ export const QuizRoutes: Routes = [
         }
       },
       {
-        path: 'manage-quiz',
-        component: ManageQuizComponent,
+        path: 'add-question',
+        component: AddQuestionComponent,
         data: {
-          title: 'Gerer les quiz'
+          title: 'Ajouter des questions'
         }
-      }
+      },
+      {
+        path: 'add-answer/:id',
+        component: AddAnswerComponent,
+        data: {
+          title: 'Ajouter les réponses'
+        }
+      },
+
     ]
   }
 ];

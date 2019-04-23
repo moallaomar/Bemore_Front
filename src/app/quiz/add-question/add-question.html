@@ -1,0 +1,50 @@
+<div class="container-fluid">
+	<div class="page-title">
+		<h4>Data Table</h4>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-block">   
+                    <div class="table-overflow">
+
+                      <H2> Veuillez saisir les Questions</H2>
+
+                      <form class="mrg-top-40">
+                        <div class="row">
+                          <div class="col-md-10 ml-auto mr-auto">
+
+                            <div class="row">
+                              <div class="form-inline">
+                                <input #newQuestion class="form-control mr-1"
+                                       (keyup.enter)="addQuestion(newQuestion.value)"
+                                       (blur)="addQuestion(newQuestion.value); newQuestion.value='' " />
+
+                                <button class="btn btn-info"  (click)="addQuestion(newQuestion.value)">Ajouter une question</button>
+                              </div>
+                            </div>
+
+
+
+                            <div class="form-group" *ngFor="let question of questions" >
+                              <ul>
+                                <li>
+                                  <input name="" value="{{question.content}}" type="text" disabled />
+                                  <button type="button" class="btn-info btn-sm" [routerLink]="['/quiz/add-answer',question.id]">Ajouter réponses</button>
+                                  <button type="button" class="btn-info btn-sm" (click)="deleteQuestion(question)" >Supprimer</button>
+
+
+
+                                </li></ul>
+                            </div>
+
+                          </div>
+                        </div>
+                      </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    

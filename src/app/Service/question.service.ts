@@ -21,8 +21,8 @@ export class QuestionService {
 
     return this.http.post<Question>(this.host2+'/question' , question);
   }
-getQuestionByIdQuiz(id:number){
-    return this.http.get<Question[]>(this.host2+'/quiz/'+id);
+getQuestionByID(id:number){
+    return this.http.get<Question>(this.host2+'/question/'+id);
 }
 deleteQuestionById(id : number) {
   return this.http.delete(this.host2 + '/question'+'/' + id);

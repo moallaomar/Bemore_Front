@@ -40,9 +40,7 @@ export class LoginComponent implements OnInit {
         console.log("erreur");
         this.mode = 1;
       })
-    if (this.loginForm.invalid) {
-      console.log('Invalid Form !!!!!');
-    }
+
 
 }
 
