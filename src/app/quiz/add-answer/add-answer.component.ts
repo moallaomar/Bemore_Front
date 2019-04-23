@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {QuestionService} from "../../Service/question.service";
 import {switchMap} from "rxjs/operators";
 import {Question} from "../../Model/question.model";
+import {Answer} from "../../Model/answer.model";
+import {AnswerService} from "../../Service/answer.service";
 
 @Component({
   selector: 'app-add-answer',
@@ -11,8 +13,10 @@ import {Question} from "../../Model/question.model";
 export class AddAnswerComponent implements OnInit {
 
   question: Question = new Question();
+  answer:Answer = new Answer();
+  answers: Answer[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private questionService:QuestionService) { }
+  constructor(private activatedRoute: ActivatedRoute, private questionService:QuestionService,private answerService:AnswerService) { }
 
 
 
@@ -21,12 +25,36 @@ export class AddAnswerComponent implements OnInit {
     this.activatedRoute.paramMap.pipe(
       switchMap(params => {
         const id = +params.get("id")
-        return this.questionService.getQuestionByID(id);// http request
-      })).subscribe(question => this.question = question);
+        return this.questionService.getQuestionByID(id)// http request
+      })).subscribe(question =>{ this.question = question;
+                                this.answers = question.answers;});
+            console.log(this.answers);
+  }
 
-    console.log(this.question);
 
+  addAnswer(newAnswer: string) {
+    if (newAnswer) {
+      answer : this.answer = new Answer();
+      this.answer.content = newAnswer.toString();
 
+      this.answerService.getLastId().subscribe(data => {
+        this.answer.id = data + 1
+      });
+
+      // this.question.id=this.questions.length+1;
+      this.answers.push(this.answer);
+      this.answerService.saveAnswer(this.answer, this.question.id).subscribe();
+    }
+  }
+
+  deleteAnswer(answer: Answer) {
+    for (var i = 0; i < this.answers.length; i++) {
+      if (this.answers[i] === answer) {
+        this.answers.splice(i, 1);
+      }
+    }
+    console.log(answer.id);
+    this.answerService.deleteById(answer.id).subscribe();
   }
 
 }

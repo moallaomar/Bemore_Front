@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Question} from "../../Model/question.model";
 import {QuestionService} from "../../Service/question.service";
+import {ActivatedRoute} from "@angular/router";
+import {switchMap} from "rxjs/operators";
+import {QuizService} from "../../Service/quiz.service";
+import {Quiz} from "../../Model/Quiz.model";
 
 @Component ({
     templateUrl: 'add-question.html'
@@ -10,11 +14,22 @@ export class AddQuestionComponent implements OnInit {
 
   question : Question = new Question();
 
-  constructor(private questionService:QuestionService){}
+  constructor(private questionService:QuestionService, private activatedRoute: ActivatedRoute, private quizService:QuizService){}
   questions: Question[] = [];
 
 
     ngOnInit(): void {
+
+      this.activatedRoute.paramMap.pipe(
+        switchMap(params => {
+          const id = +params.get("id");
+          return this.quizService.getQuizbyId(id)// http request
+        })
+      ).subscribe(quiz =>{ this.questions = quiz;
+      });
+
+
+
 
     }
 

@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Quiz} from "../Model/Quiz.model";
+import {Question} from "../Model/question.model";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,9 @@ export class QuizService {
 
   isQuizName(name:string){
     return this.http.get<string>(this.host2+'/isquizname/'+name);
+  }
+  getQuizbyId(id:number){
+    return this.http.get<Question[]>(this.host2+'/quiz/'+id);
   }
 
 

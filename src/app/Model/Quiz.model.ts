@@ -6,9 +6,9 @@ export class Quiz {
   constructor() {
   }
 id:number
-  Name:number
-   Description:String;
-  questions:Question[];
+  name:number
+   description:String;
+  question:Question[];
 
 
 }

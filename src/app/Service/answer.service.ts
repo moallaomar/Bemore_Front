@@ -24,6 +24,9 @@ export class AnswerService {
   getLastId(){
     return this.http.get<number>(this.host2+'/answer/count')
   }
+  deleteById(id:number){
+    return this.http.delete<String>(this.host2+'/answer/'+id);
+  }
 
 
 }

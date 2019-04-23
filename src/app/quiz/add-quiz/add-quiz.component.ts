@@ -28,7 +28,7 @@ export class AddQuizComponent implements OnInit{
   }
 
 
-  quiz: Quiz;
+  quiz: Quiz = new Quiz();
 
 
 
@@ -54,8 +54,15 @@ export class AddQuizComponent implements OnInit{
 
         } else {
 
-          this.quizService.createQuiz(data).subscribe();
-          this.router.navigateByUrl('/quiz/add-question')
+          this.quizService.getLastQuiz().subscribe(data => this.quiz.id = data.id + 1);
+
+          this.quiz.name = data.name;
+          this.quiz.description= data.description;
+            console.log(this.quiz);
+          this.quizService.createQuiz(this.quiz).subscribe(succ =>
+          this.router.navigateByUrl('/quiz/add-question/'+this.quiz.id)
+
+          );
         }
       })
 

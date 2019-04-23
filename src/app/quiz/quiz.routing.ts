@@ -16,7 +16,7 @@ export const QuizRoutes: Routes = [
         }
       },
       {
-        path: 'add-question',
+        path: 'add-question/:id',
         component: AddQuestionComponent,
         data: {
           title: 'Ajouter des questions'
