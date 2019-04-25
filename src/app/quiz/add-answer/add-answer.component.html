@@ -14,33 +14,58 @@
 
                   <div class="row">
                     <div class="form-inline">
+                      <div class="d-inline p-2">
                       <input #newAnswer class="form-control mr-1"
                              (keyup.enter)="addAnswer(newAnswer.value)"
-                             (blur)="addAnswer(newAnswer.value); newAnswer.value='' " />
+                              />
+                      </div>
 
+                      <div class="d-inline p-2">
+                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
+                          <label ngbButtonLabel class="btn-info btn-sm">
+                            <input ngbButton type="radio"  (click)="setTrue()"  value=1>Correct
+                          </label>
+                          <label ngbButtonLabel class="btn-info btn-sm">
+                            <input ngbButton type="radio" (click)="setFalse()"> Incorrect
+                          </label>
+
+                        </div>
+                      </div>
+                      <div class="d-inline p-2">
                       <button class="btn btn-info"  (click)="addAnswer(newAnswer.value)">Ajouter une réponse</button>
+                      </div>
                     </div>
                   </div>
 
 
 
-                  <div class="form-group" *ngFor="let answer of answers" >
-                    <ul>
-                      <li>
-                        <input name="" value="{{answer.content}}" type="text" disabled />
-                        <button type="button" class="btn-info btn-sm" (click)="deleteAnswer(answer)" >Supprimer</button>
+                  <div class="row" *ngFor="let ans of answers ;let idx = index" >
+                    <div class="d-inline p-2">
+                    <label>{{ans.content}}</label>
+                    </div>
+                    <div class="d-inline p-2">
+                    <button type="button" class="btn-info btn-sm" (click)="deleteAnswer(ans)" >Supprimer</button>
+                    </div>
+                    <div class="d-inline p-2">
+                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="ans.correct">
+                      <label ngbButtonLabel class="btn-info btn-sm">
+                        <input ngbButton type="radio" value="{{ans.correct}}">Correct
+                      </label>
+                      <label ngbButtonLabel class="btn-info btn-sm">
+                        <input ngbButton type="radio" value="{{ans.correct}}"> Incorrect
+                      </label>
+
+                    </div>
+                    </div>
 
 
 
-                      </li></ul>
+
                   </div>
 
                 </div>
               </div>
             </form>
-
-
-
 
           </div>
         </div>

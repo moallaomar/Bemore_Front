@@ -26,6 +26,7 @@ import {QuizModule} from "./quiz/quiz.modules";
 import {AddQuizComponent} from "./quiz/add-quiz/add-quiz.component";
 import {AnswerService} from "./Service/answer.service";
 import { AddAnswerComponent } from './quiz/add-answer/add-answer.component';
+import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 
 @NgModule({
     imports: [
@@ -43,6 +44,7 @@ import { AddAnswerComponent } from './quiz/add-answer/add-answer.component';
         CommonLayoutComponent,
         AuthenticationLayoutComponent,
         Sidebar_Directives,
+
     ],
     providers: [AuthenticationService, QuestionService,QuizService, AnswerService,
       {

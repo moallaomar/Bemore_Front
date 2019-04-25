@@ -30,17 +30,25 @@
                 <span class="title">Accueil</span>
               </a>
             </li>
-            <li clas="nav-item" routerLinkActive="active">
-              <a *ngIf="isAdmin()"  class="mrg-top-30" href="" [routerLink]="['/quiz/add-quiz']">
+            <li class="nav-item dropdown" >
+              <a class="dropdown-toggle" href="javascript:void(0);" >
                                 <span class="icon-holder">
                                     <i class="ti-file"></i>
                                 </span>
-                <span class="title">Ajouter un test</span>
+                <span class="title">Gèrer les tests</span>
+                <span class="arrow">
+                                    <i class="ti-angle-right"></i>
+                                </span>
               </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="" [routerLink]="['/quiz/add-quiz']">Ajouter un test</a>
+                </li>
+                <li>
+                  <a href="" [routerLink]="['/quiz/list-quiz']">Afficher les tests</a>
+                </li>
+              </ul>
             </li>
-
-
-
 
           </ul>
         </div>
@@ -82,12 +90,7 @@
                     </a>
                   </li>
                   <!-- User Inbox -->
-                  <li>
-                    <a href="">
-                      <i class="ti-email pdd-right-10"></i>
-                      <span>Inbox</span>
-                    </a>
-                  </li>
+
                   <li role="separator" class="divider">
 
                   </li>

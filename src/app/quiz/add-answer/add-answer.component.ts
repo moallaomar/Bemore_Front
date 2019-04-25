@@ -12,11 +12,13 @@ import {AnswerService} from "../../Service/answer.service";
 })
 export class AddAnswerComponent implements OnInit {
 
+
   question: Question = new Question();
   answer:Answer = new Answer();
   answers: Answer[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private questionService:QuestionService,private answerService:AnswerService) { }
+  constructor(private activatedRoute: ActivatedRoute, private questionService:QuestionService,private answerService:AnswerService) {
+  }
 
 
 
@@ -28,20 +30,19 @@ export class AddAnswerComponent implements OnInit {
         return this.questionService.getQuestionByID(id)// http request
       })).subscribe(question =>{ this.question = question;
                                 this.answers = question.answers;});
-            console.log(this.answers);
   }
-
-
+  setTrue(){
+    this.answer.correct = true;
+  }
+  setFalse(){
+    this.answer.correct = false;
+  }
   addAnswer(newAnswer: string) {
     if (newAnswer) {
-      answer : this.answer = new Answer();
       this.answer.content = newAnswer.toString();
-
       this.answerService.getLastId().subscribe(data => {
         this.answer.id = data + 1
       });
-
-      // this.question.id=this.questions.length+1;
       this.answers.push(this.answer);
       this.answerService.saveAnswer(this.answer, this.question.id).subscribe();
     }
@@ -51,10 +52,7 @@ export class AddAnswerComponent implements OnInit {
     for (var i = 0; i < this.answers.length; i++) {
       if (this.answers[i] === answer) {
         this.answers.splice(i, 1);
-      }
-    }
-    console.log(answer.id);
+      }}
     this.answerService.deleteById(answer.id).subscribe();
   }
-
 }

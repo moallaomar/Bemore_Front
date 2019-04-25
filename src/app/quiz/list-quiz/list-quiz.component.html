@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="page-title">
+    <h4>List des quiz</h4>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-block">
+          <div class="table-overflow">
+            <table class="table table-lg table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+              <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Date de créaction</th>
+                <th>Description</th>
+                <th>Suppression</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr  *ngFor="let q of quizes">
+                <td>
+                  <div class="relative mrg-top-15">
+                    <span class="title">{{q.name}}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="relative mrg-top-15">
+                    <span class="title">{{q.createdDate}}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="relative mrg-top-15">
+                    <span class="title">{{q.description}}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="relative mrg-top-15">
+                    <button type="button" class="btn btn-danger" (click)="deleteQuiz(q.id)">Supprimer</button>
+
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import {Routes} from '@angular/router';
 import {AddQuizComponent} from './add-quiz/add-quiz.component';
 import {AddQuestionComponent} from "./add-question/add-question.component";
 import {AddAnswerComponent} from "./add-answer/add-answer.component";
+import {ListQuizComponent} from "./list-quiz/list-quiz.component";
 
 export const QuizRoutes: Routes = [
   {
@@ -27,6 +28,13 @@ export const QuizRoutes: Routes = [
         component: AddAnswerComponent,
         data: {
           title: 'Ajouter les réponses'
+        }
+      },
+      {
+        path: 'list-quiz',
+        component: ListQuizComponent,
+        data: {
+          title: 'Gèrer les tests'
         }
       },
 

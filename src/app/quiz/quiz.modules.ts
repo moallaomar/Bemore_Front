@@ -11,6 +11,9 @@ import {ArchwizardModule} from "angular-archwizard";
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import {AddQuestionComponent} from "./add-question/add-question.component";
 import {AddAnswerComponent} from "./add-answer/add-answer.component";
+import {JwBootstrapSwitchNg2Module} from "jw-bootstrap-switch-ng2";
+import {ListQuizComponent} from "./list-quiz/list-quiz.component";
+import {DataTablesModule} from "angular-datatables";
 
 
 @NgModule({
@@ -23,15 +26,19 @@ import {AddAnswerComponent} from "./add-answer/add-answer.component";
     NgSelectizeModule,
     NgbModule,
     Ng2SmartTableModule,
-    CustomFormsModule
+    CustomFormsModule,
+    JwBootstrapSwitchNg2Module,
+    DataTablesModule,
   ],
   declarations: [
     AddQuizComponent,
     AddQuestionComponent,
     AddAnswerComponent,
+    ListQuizComponent
   ],
   bootstrap:    [ AddQuizComponent],
 
 })
 export class QuizModule {
+
 }

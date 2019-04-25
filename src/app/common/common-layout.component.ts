@@ -17,7 +17,7 @@ export class CommonLayoutComponent implements OnInit {
   private user: User;
   private role: String;
   private currentUser: CurrentUser;
-  private username : String;
+  public username : String;
   public app : any;
   public headerThemes: any;
   public changeHeader: any;

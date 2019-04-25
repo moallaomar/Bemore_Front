@@ -27,6 +27,12 @@ export class QuizService {
   getQuizbyId(id:number){
     return this.http.get<Question[]>(this.host2+'/quiz/'+id);
   }
+  getAll(){
+    return this.http.get<Quiz[]> (this.host2+'/quiz')
+  }
+  deleteQuiz(id:number){
+    return this.http.delete(this.host2+'/quiz/'+id);
+  }
 
 
 
