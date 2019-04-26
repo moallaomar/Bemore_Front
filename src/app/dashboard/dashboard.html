@@ -1,9 +1,5 @@
 <div class="container-fluid">
 	<div class="row">
-
-
-
-
             <div *ngIf="isAdmin()" style="background-color: white; width: 75%; padding: 10px; border: 1px solid white; margin: 20px; ; top: 50%; left: 50%;">
               <p *ngIf="weather.length == 0">Searching...</p>
               <div *ngIf="weather.length > 0">
@@ -23,5 +19,52 @@
             </div>
 
 					</div>
-				</div>
+
+  <div class="row" *ngIf="!isAdmin()">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-block">
+          <div class="table-overflow">
+            <div class="row">
+            </div>
+            <br>
+            <table class="table table-lg table-hover">
+              <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Commencer</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr  *ngFor="let q of quizes">
+                <td>
+                  <div class="relative mrg-top-20" >
+                    <span class="title">{{q.name}}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="relative mrg-top-20">
+                    <span class="title">{{q.description}}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="relative mrg-top-15">
+                    <div class="d-inline p-1">
+                      <a  id="Play" class="btn btn-info" [routerLink]="['/quiz/exam',q.id]">
+                        <i class="ti-control-play pdd-right-5" ></i>
+                        <span >Commencer</span>
+                      </a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 

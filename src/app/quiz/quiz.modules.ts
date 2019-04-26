@@ -14,6 +14,7 @@ import {AddAnswerComponent} from "./add-answer/add-answer.component";
 import {JwBootstrapSwitchNg2Module} from "jw-bootstrap-switch-ng2";
 import {ListQuizComponent} from "./list-quiz/list-quiz.component";
 import {DataTablesModule} from "angular-datatables";
+import {ExamComponent} from "./exam/exam.component";
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {DataTablesModule} from "angular-datatables";
     AddQuizComponent,
     AddQuestionComponent,
     AddAnswerComponent,
-    ListQuizComponent
+    ListQuizComponent,
+    ExamComponent
   ],
   bootstrap:    [ AddQuizComponent],
 

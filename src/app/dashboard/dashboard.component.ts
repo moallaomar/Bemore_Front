@@ -7,6 +7,8 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {CurrentUser} from "../Model/currentUser";
 import {AuthenticationService} from "../Service/authentication.service";
+import {QuizService} from "../Service/quiz.service";
+import {Quiz} from "../Model/Quiz.model";
 
 @Component({
     templateUrl: 'dashboard.html'
@@ -18,10 +20,11 @@ export class DashboardComponent {
   private appId: string;
   private appCode: string;
   private currentUser: CurrentUser;
+  private quizes : Quiz[] = [];
 
   public weather: any;
 
-  public constructor(private http: HttpClient , private authService: AuthenticationService) {
+  public constructor(private http: HttpClient , private authService: AuthenticationService,private quizService:QuizService) {
     this.appId = "G3FPZ7gZn5VbCAuo3jiz";
     this.appCode = "lhVpg4SR_GwU3ZSges8ikA";
     this.weather = [];
@@ -43,6 +46,11 @@ export class DashboardComponent {
       this.roles =  this.currentUser.authorities;
 
     });
+
+this.quizService.getAll().subscribe(data => {this.quizes = data});
+
+
+
 
   }
 

@@ -7,6 +7,7 @@ export class Question {
 
 id:number;
   content: string;
+  answered: boolean;
   answers: Answer[];
 
 
