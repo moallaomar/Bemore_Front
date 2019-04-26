@@ -7,10 +7,10 @@ export class Quiz {
   constructor() {
   }
 id:number
-  name:number
-   description:String;
+  name:string
+   description:string;
   question:Question[];
-  createdDate: DateTimeFormat;
+  createdDate: Date;
 
 
 }

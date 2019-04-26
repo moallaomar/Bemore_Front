@@ -1,13 +1,27 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-3">
-			<div class="card">
-				<div class="card-block">
-					<div class="inline-block">
-				<h1>DASHBOARD </h1>
+
+
+
+
+            <div *ngIf="isAdmin()" style="background-color: white; width: 75%; padding: 10px; border: 1px solid white; margin: 20px; ; top: 50%; left: 50%;">
+              <p *ngIf="weather.length == 0">Searching...</p>
+              <div *ngIf="weather.length > 0">
+                <table style="width: 100%; text-align: center">
+                  <thead></thead>
+                  <tbody>
+                  <tr>
+                    <td *ngFor="let forecast of weather">
+                      <img [src]="forecast.iconLink" />
+                      <p>{{ forecast.highTemperature }}C</p>
+                      <p>{{ forecast.utcTime | date: 'dd - MMMM - yyyy' }}</p>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
 					</div>
 				</div>
-			</div>
-		</div>	
-	</div>
-</div>
+

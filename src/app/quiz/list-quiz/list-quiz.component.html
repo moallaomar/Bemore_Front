@@ -7,36 +7,55 @@
       <div class="card">
         <div class="card-block">
           <div class="table-overflow">
-            <table class="table table-lg table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+<div class="row">
+  <div class="mrg-right-20">
+  <input type="text" class="form-control mr-1"
+        placeholder="Filtrer par Nom : "
+         [(ngModel)]="listFilter" />
+
+  </div>
+</div>
+            <br>
+            <table class="table table-lg table-hover">
               <thead>
               <tr>
                 <th>Nom</th>
-                <th>Date de créaction</th>
+                <th>Date de création</th>
                 <th>Description</th>
-                <th>Suppression</th>
+                <th>Supprimer/Modifier</th>
               </tr>
               </thead>
               <tbody>
-              <tr  *ngFor="let q of quizes">
+              <tr  *ngFor="let q of filtredQuiz">
                 <td>
-                  <div class="relative mrg-top-15">
+                  <div class="relative mrg-top-20" >
                     <span class="title">{{q.name}}</span>
                   </div>
                 </td>
                 <td>
-                  <div class="relative mrg-top-15">
+                  <div class="relative mrg-top-20" >
                     <span class="title">{{q.createdDate}}</span>
                   </div>
                 </td>
                 <td>
-                  <div class="relative mrg-top-15">
+                  <div class="relative mrg-top-20">
                     <span class="title">{{q.description}}</span>
                   </div>
                 </td>
                 <td>
                   <div class="relative mrg-top-15">
-                    <button type="button" class="btn btn-danger" (click)="deleteQuiz(q.id)">Supprimer</button>
-
+                    <div class="d-inline p-1">
+                    <a class="btn btn-danger" (click)="deleteQuiz(q.id)">
+                      <i class="ti-trash pdd-right-5"></i>
+                      <span>Supprimer</span>
+                    </a>
+                    </div>
+                    <div class="d-inline p-1">
+                      <a class="btn btn-info" [routerLink]="['/quiz/add-question',q.id]">
+                        <i class="ti-pencil pdd-right-5"></i>
+                        <span>Modifier</span>
+                      </a>
+                    </div>
                   </div>
                 </td>
               </tr>

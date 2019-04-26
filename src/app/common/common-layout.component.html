@@ -30,24 +30,21 @@
                 <span class="title">Accueil</span>
               </a>
             </li>
-            <li class="nav-item dropdown" >
-              <a class="dropdown-toggle" href="javascript:void(0);" >
+            <li clas="nav-item" routerLinkActive="active" *ngIf="isAdmin()" >
+              <a *ngIf="isUser()"  class="mrg-top-30" href="" [routerLink]="['/quiz/add-quiz']">
                                 <span class="icon-holder">
                                     <i class="ti-file"></i>
                                 </span>
-                <span class="title">Gèrer les tests</span>
-                <span class="arrow">
-                                    <i class="ti-angle-right"></i>
-                                </span>
+                <span class="title">Ajouter un test</span>
               </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="" [routerLink]="['/quiz/add-quiz']">Ajouter un test</a>
-                </li>
-                <li>
-                  <a href="" [routerLink]="['/quiz/list-quiz']">Afficher les tests</a>
-                </li>
-              </ul>
+            </li>
+            <li clas="nav-item" routerLinkActive="active" *ngIf="isAdmin()" >
+              <a *ngIf="isUser()"  class="mrg-top-30" href="" [routerLink]="['/quiz/list-quiz']">
+                                <span class="icon-holder">
+                                    <i class="ti-list"></i>
+                                </span>
+                <span class="title">Afficher les tests</span>
+              </a>
             </li>
 
           </ul>

@@ -28,6 +28,7 @@ export class CommonLayoutComponent implements OnInit {
   public searchActived : any;
   public searchModel: any;
 
+
   constructor(private route: Router, private authService: AuthenticationService) {
     this.app = {
       layout: {
@@ -39,6 +40,8 @@ export class CommonLayoutComponent implements OnInit {
         searchActived: false
       }
     };
+
+
 
     this.headerThemes = ['header-default', 'header-primary', 'header-info', 'header-success', 'header-danger', 'header-dark'];
     this.changeHeader = changeHeader;
@@ -69,7 +72,6 @@ export class CommonLayoutComponent implements OnInit {
     this.authService.getCurrentUser().subscribe(data => {
 
       this.currentUser = data as CurrentUser;
-      console.log(this.currentUser.name);
       this.roles =  this.currentUser.authorities;
       this.dataLoaded = 1;
       this.username = this.currentUser.name.toLowerCase();

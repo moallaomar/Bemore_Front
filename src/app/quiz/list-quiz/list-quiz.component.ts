@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {QuizService} from "../../Service/quiz.service";
 import {Quiz} from "../../Model/Quiz.model";
 import {Subject} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-quiz',
@@ -10,42 +11,49 @@ import {Subject} from "rxjs";
 })
 export class ListQuizComponent implements OnInit , OnDestroy, AfterViewInit {
 
-  dtOptions: DataTables.Settings = {};
-  quizes : Quiz[] = []
+  quizes : Quiz[] = [];
   dtTrigger: Subject<Quiz> = new Subject();
+  quiz:Quiz = new Quiz();
+  _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
 
-  constructor(private quizService:QuizService) { }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filtredQuiz = this.listFilter ? this.performFilter(this.listFilter) : this.quizes;
+  }
+
+  filtredQuiz: Quiz[] = [];
+
+  constructor(private quizService:QuizService, private router:Router) { }
 
   ngOnInit() {
 
     this.getAll();
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 7,
-      lengthChange: false,
-      info: false,
-      language: {
-        search: "Rechercher"
-      },
-    };
+
+  }
+  performFilter(filterBy: string): Quiz[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.quizes.filter((quiz: Quiz) =>
+      quiz.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
   getAll() {
     this.quizService.getAll().subscribe(data => {
       this.quizes = data;
+      this.filtredQuiz = this.performFilter(this.listFilter);
+
     });
   }
-
   ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
+      this.dtTrigger.unsubscribe();
   }
-
   deleteQuiz(id: number){
-    this.quizService.deleteQuiz(id).subscribe(()=> {
+    this.quizService.deleteQuiz(id).subscribe(() => {
       this.getAll();
     });
   }
   ngAfterViewInit(): void {
     this.dtTrigger.next();
   }
-
 }

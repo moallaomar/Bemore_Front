@@ -11,13 +11,17 @@ import { DashboardRoutes } from './dashboard-routing.module';
 
 //Dashboard Component
 import { DashboardComponent } from './dashboard.component';
+import {AngularWeatherWidgetModule, WeatherApiName} from "angular-weather-widget";
+import {HttpClientJsonpModule, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     imports: [
         RouterModule.forChild(DashboardRoutes),
         ChartsModule,
         NvD3Module,
-        PerfectScrollbarModule 
+        PerfectScrollbarModule,
+      HttpClientModule,
+      HttpClientJsonpModule,
     ],
     declarations: [
         DashboardComponent
