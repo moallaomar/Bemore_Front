@@ -48,12 +48,7 @@ import { ExamComponent } from './quiz/exam/exam.component';
 
 
     ],
-    providers: [AuthenticationService, QuestionService,QuizService, AnswerService,
-      {
-        provide: HTTP_INTERCEPTORS,
-        useClass: AuthInterceptor,
-        multi: true
-      }, ],
+    providers: [ ],
     bootstrap: [AppComponent],
 })
 

@@ -15,6 +15,12 @@ import {JwBootstrapSwitchNg2Module} from "jw-bootstrap-switch-ng2";
 import {ListQuizComponent} from "./list-quiz/list-quiz.component";
 import {DataTablesModule} from "angular-datatables";
 import {ExamComponent} from "./exam/exam.component";
+import {AuthenticationService} from "../Service/authentication.service";
+import {QuestionService} from "../Service/question.service";
+import {QuizService} from "../Service/quiz.service";
+import {AnswerService} from "../Service/answer.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "../Service/auth.interceptor";
 
 
 @NgModule({
@@ -38,6 +44,12 @@ import {ExamComponent} from "./exam/exam.component";
     ListQuizComponent,
     ExamComponent
   ],
+  providers: [QuestionService,QuizService, AnswerService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }, ],
   bootstrap:    [ AddQuizComponent],
 
 })

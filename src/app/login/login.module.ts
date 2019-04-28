@@ -9,6 +9,7 @@ import {LoginComponent} from "./login.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import { SignupComponent } from './signup/signup.component';
+import {AuthenticationService} from "../Service/authentication.service";
 
 @NgModule({
     imports: [
@@ -22,7 +23,7 @@ import { SignupComponent } from './signup/signup.component';
         SignupComponent
     ],
     providers: [
-        ThemeConstants
+        ThemeConstants, AuthenticationService,
     ]
 })
 export class LoginModule { }

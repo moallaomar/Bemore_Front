@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MustMatch} from "./mustmatch";
 import {AuthenticationService} from "../../Service/authentication.service";
+import {UserForm} from "../../Model/UserForm";
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +15,7 @@ export class SignupComponent implements OnInit {
   password: string;
   submitted = false;
   confirmedPassword:string
+  userform : UserForm;
   signupForm: FormGroup;
   constructor(private formBuilder: FormBuilder,private authService: AuthenticationService, private router:Router) { }
 
@@ -32,11 +34,11 @@ export class SignupComponent implements OnInit {
   signup(data){
 
     this.submitted = true;
-    console.log(data);
+
 
     this.authService.register(data).subscribe(resp => {
-        console.log('succes');
-        this.router.navigateByUrl('/login');
+
+      this.router.navigateByUrl('/login');
       }, error1 => {
       console.log("erreur");}
     );

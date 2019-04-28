@@ -13,7 +13,7 @@ import {Quiz} from "../../Model/Quiz.model";
 export class AddQuestionComponent implements OnInit {
 
   question : Question = new Question();
-
+  id:number;
   constructor(private questionService:QuestionService, private activatedRoute: ActivatedRoute, private quizService:QuizService){}
   questions: Question[] = [];
 
@@ -23,6 +23,7 @@ export class AddQuestionComponent implements OnInit {
       this.activatedRoute.paramMap.pipe(
         switchMap(params => {
           const id = +params.get("id");
+          this.id = id;
           return this.quizService.getQuizbyId(id)// http request
         })
       ).subscribe(quiz =>{ this.questions = quiz;
@@ -45,7 +46,7 @@ export class AddQuestionComponent implements OnInit {
 
       // this.question.id=this.questions.length+1;
       this.questions.push(this.question);
-      this.questionService.createQuestion(this.question).subscribe()
+      this.questionService.createQuestion(this.question , this.id).subscribe()
 
 
     }

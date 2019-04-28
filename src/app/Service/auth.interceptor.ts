@@ -26,10 +26,10 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(authReq)
       .catch(err => {
         // onError
-        console.log(err);
+        //console.log(err);
         if (err instanceof HttpErrorResponse) {
-          console.log(err.status);
-          console.log(err.statusText);
+      //    console.log(err.status);
+          // console.log(err.statusText);
           if (err.status === 403) {
               this.router.navigateByUrl('/login');
             }

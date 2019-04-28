@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpBackend, HttpClient} from "@angular/common/http";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {observable} from "rxjs";
 import {User} from "../Model/user_model";
+import {UserForm} from "../Model/UserForm";
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,19 @@ export class AuthenticationService {
   private  jwt:string;
   private  username:string;
   private roles:Array<any>=[];
-  constructor(private http:HttpClient) { }
+  private httpClient: HttpClient;
+
+  constructor(private http:HttpClient,  handler: HttpBackend) {
+    this.httpClient = new HttpClient(handler);
+  }
 
 
   register(data){
-    return this.http.post(this.host2+"/register", data ,{observe: 'response'})
+    console.log(data);
+    return this.httpClient.post<UserForm>(this.host2+"/register", data )
   }
 
   login(data){
-  console.log('here');
   console.log(data);
     return this.http.post(this.host2+"/login", data, {observe: 'response'});
   }

@@ -17,9 +17,9 @@ export class QuestionService {
     return  this.http.get<Question[]>(this.host2+'/questions');
   }
 
-  createQuestion(question : Question){
+  createQuestion(question : Question, id:number){
 
-    return this.http.post<Question>(this.host2+'/question' , question);
+    return this.http.post<Question>(this.host2+'/question/'+id , question);
   }
 getQuestionByID(id:number){
     return this.http.get<Question>(this.host2+'/question/'+id);
