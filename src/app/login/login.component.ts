@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(data)
       .subscribe(resp => {
         let jwt = resp.headers.get('Authorization');
-        console.log(jwt);
+
         this.authService.saveToken(jwt);
         this.router.navigateByUrl('/dashboard')
       }, error1 => {

@@ -15,7 +15,6 @@ import {Answer} from "../../Model/answer.model";
 export class ExamComponent implements OnInit {
 
   mode = 'quiz';
-  private questions: Question[] = [];
   quiz: Quiz = new Quiz();
   config: QuizConfig = {
     'allowBack': true,
@@ -31,7 +30,6 @@ export class ExamComponent implements OnInit {
     'showPager': true,
     'theme': 'none'
   };
-
   pager = {
     index: 0,
     size: 1,
@@ -42,10 +40,15 @@ export class ExamComponent implements OnInit {
   endTime: Date;
   ellapsedTime = '00:00';
   duration = '';
+  private questions: Question[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private quizService: QuizService, private router: Router) {
   }
 
+  get filteredQuestions() {
+    return (this.questions) ?
+      this.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
+  }
 
   ngOnInit() {
     this.activatedRoute.paramMap.pipe(
@@ -55,6 +58,12 @@ export class ExamComponent implements OnInit {
         return this.quizService.getQuizbyId(id)// http request
       })
     ).subscribe(quiz => {
+      if (quiz == null) {
+
+        this.router.navigate(['/dashboard'])
+      }else {
+
+
         /*        this.mode = 'result'
 
                 this.quizService.findQuizAnswerByQuizUser(this.quiz.id).subscribe(data => {
@@ -62,8 +71,6 @@ export class ExamComponent implements OnInit {
                     data.forEach(data => {
                       this.questions.push(data.question);
                       this.answerArray.push(data.selectedAnswer)
-
-
                     })
                   console.log(this.questions);
                   console.log(this.answerArray);
@@ -82,7 +89,7 @@ export class ExamComponent implements OnInit {
         }, 1000);
         this.duration = this.parseTime(this.config.duration);
         this.mode = 'quiz';
-
+      }
     });
 
   }
@@ -102,12 +109,6 @@ export class ExamComponent implements OnInit {
     mins = (mins < 10 ? '0' : '') + mins;
     secs = (secs < 10 ? '0' : '') + secs;
     return `${mins}:${secs}`;
-  }
-
-
-  get filteredQuestions() {
-    return (this.questions) ?
-      this.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
   }
 
   onSelect(question: Question, answer: Answer) {
@@ -145,9 +146,7 @@ export class ExamComponent implements OnInit {
       answers.push({'questionId': question.id, 'answered': (selected ? selected.id : null)});
     });
 
-    this.quizService.submitQuiz({id: this.quiz.id, answers: answers})
-      .subscribe(value => console.log(value));
-    console.log(answers);
+    this.quizService.submitQuiz({id: this.quiz.id, answers: answers}).subscribe();
     this.mode = 'result'
   }
 }

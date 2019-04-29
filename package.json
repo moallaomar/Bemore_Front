@@ -1,6 +1,6 @@
 {
-  "name": "espire",
-  "version": "0.0.0",
+  "name": "Bemore-Exam",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json --open --configuration",
@@ -38,7 +38,7 @@
     "datatables.net-dt": "^1.10.16",
     "fullcalendar": "3.6.1",
     "imagesloaded": "^4.1.3",
-    "jquery": "^3.2.1",
+    "jquery": "^3.3.1",
     "jw-bootstrap-switch-ng2": "^2.0.5",
     "moment": "^2.19.1",
     "ng-selectize": "^1.1.1",

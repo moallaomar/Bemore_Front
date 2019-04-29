@@ -11,7 +11,8 @@ import {Quiz} from "../Model/Quiz.model";
 import {Router} from "@angular/router";
 
 @Component({
-  templateUrl: 'dashboard.html'
+  templateUrl: 'dashboard.html',
+  styleUrls: ['./dashboard.component.css']
 })
 
 export class DashboardComponent {

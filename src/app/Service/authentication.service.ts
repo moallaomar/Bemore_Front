@@ -28,7 +28,7 @@ export class AuthenticationService {
   }
 
   login(data){
-  console.log(data);
+
     return this.http.post(this.host2+"/login", data, {observe: 'response'});
   }
 saveToken(jwt:string){
