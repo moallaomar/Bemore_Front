@@ -1,26 +1,32 @@
 <div class="container-fluid">
-	<div class="row">
-            <div *ngIf="isAdmin()" style="background-color: white; width: 75%; padding: 10px; border: 1px solid white; margin: 20px; ; top: 50%; left: 50%;">
-              <p *ngIf="weather.length == 0">Searching...</p>
-              <div *ngIf="weather.length > 0">
-                <table style="width: 100%; text-align: center">
-                  <thead></thead>
-                  <tbody>
-                  <tr>
-                    <td *ngFor="let forecast of weather">
-                      <img [src]="forecast.iconLink" />
-                      <p>{{ forecast.highTemperature }}C</p>
-                      <p>{{ forecast.utcTime | date: 'dd - MMMM - yyyy' }}</p>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+  <div class="row">
 
-					</div>
+    <div *ngIf="display == true;" class="alert alert-warning col-md-6">
+      <strong>Attention!</strong> Vous ne pouvez pas passer l'éxamen une 2eme fois.
+    </div>
 
-  <div class="row" *ngIf="!isAdmin()">
+    <div *ngIf="isAdmin()"
+         style="background-color: white; width: 75%; padding: 10px; border: 1px solid white; margin: 20px; ; top: 50%; left: 50%;">
+      <p *ngIf="weather.length == 0">Searching...</p>
+      <div *ngIf="weather.length > 0">
+        <table style="width: 100%; text-align: center">
+          <thead></thead>
+          <tbody>
+          <tr>
+            <td *ngFor="let forecast of weather">
+              <img [src]="forecast.iconLink"/>
+              <p>{{ forecast.highTemperature }}C</p>
+              <p>{{ forecast.utcTime | date: 'dd - MMMM - yyyy' }}</p>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="!isAdmin()" class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-block">
@@ -37,9 +43,9 @@
               </tr>
               </thead>
               <tbody>
-              <tr  *ngFor="let q of quizes">
+              <tr *ngFor="let q of quizes">
                 <td>
-                  <div class="relative mrg-top-20" >
+                  <div class="relative mrg-top-20">
                     <span class="title">{{q.name}}</span>
                   </div>
                 </td>
@@ -51,9 +57,9 @@
                 <td>
                   <div class="relative mrg-top-15">
                     <div class="d-inline p-1">
-                      <a  id="Play" class="btn btn-info" [routerLink]="['/quiz/exam',q.id]">
-                        <i class="ti-control-play pdd-right-5" ></i>
-                        <span >Commencer</span>
+                      <a (click)="redirect(q.id)" class="btn btn-info" id="Play">
+                        <i class="ti-control-play pdd-right-5"></i>
+                        <span>Commencer</span>
                       </a>
                     </div>
                   </div>

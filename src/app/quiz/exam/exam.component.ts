@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {switchMap} from "rxjs/operators";
-import {QuestionService} from "../../Service/question.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {QuizService} from "../../Service/quiz.service";
 import {Quiz} from "../../Model/Quiz.model";
 import {Question} from "../../Model/question.model";
 import {QuizConfig} from "../../Model/quiz-config";
 import {Answer} from "../../Model/answer.model";
-import index from "@angular/cli/lib/cli";
-import {selector} from "rxjs-compat/operator/publish";
-import {QuizAnswer} from "../../Model/QuizAnswer";
 
 @Component({
   selector: 'app-exam',
@@ -19,21 +15,19 @@ import {QuizAnswer} from "../../Model/QuizAnswer";
 export class ExamComponent implements OnInit {
 
   mode = 'quiz';
-  quizAnswer:QuizAnswer[] ;
-private questions:Question[] = [];
-answerArray : Answer[] =  [];
+  private questions: Question[] = [];
   quiz: Quiz = new Quiz();
   config: QuizConfig = {
     'allowBack': true,
     'allowReview': true,
     'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 25,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    'duration': 60,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
     'pageSize': 1,
     'requiredAll': false,  // indicates if you must answer all the questions before submitting.
-    'richText': false,
-    'shuffleQuestions': false,
-    'shuffleOptions': false,
-    'showClock': false,
+    'richText': true,
+    'shuffleQuestions': true,
+    'shuffleOptions': true,
+    'showClock': true,
     'showPager': true,
     'theme': 'none'
   };
@@ -49,7 +43,8 @@ answerArray : Answer[] =  [];
   ellapsedTime = '00:00';
   duration = '';
 
-  constructor(private activatedRoute: ActivatedRoute, private quizService: QuizService,private router:Router) {}
+  constructor(private activatedRoute: ActivatedRoute, private quizService: QuizService, private router: Router) {
+  }
 
 
   ngOnInit() {
@@ -59,32 +54,26 @@ answerArray : Answer[] =  [];
         this.quiz.id = id;
         return this.quizService.getQuizbyId(id)// http request
       })
-    ).subscribe(quiz =>{
-      if (quiz == null){
-/*        this.mode = 'result'
+    ).subscribe(quiz => {
+        /*        this.mode = 'result'
 
-        this.quizService.findQuizAnswerByQuizUser(this.quiz.id).subscribe(data => {
-          this.quizAnswer = data;
-            data.forEach(data => {
-              this.questions.push(data.question);
-              this.answerArray.push(data.selectedAnswer)
+                this.quizService.findQuizAnswerByQuizUser(this.quiz.id).subscribe(data => {
+                  this.quizAnswer = data;
+                    data.forEach(data => {
+                      this.questions.push(data.question);
+                      this.answerArray.push(data.selectedAnswer)
 
 
-            })
-          console.log(this.questions);
-          console.log(this.answerArray);
-          let answers = [];
-          this.questions.forEach(question => {
-            let selected = this.answerArray.find(answer => answer.correct);
-            answers.push({ 'questionId': question.id, 'answered': (selected ? selected.id : null) });
-          });
-        });
-*/
-alert('vous avez déja passé cet examen');
-
-this.router.navigate(['/dashboard'])
-
-      } else {
+                    })
+                  console.log(this.questions);
+                  console.log(this.answerArray);
+                  let answers = [];
+                  this.questions.forEach(question => {
+                    let selected = this.answerArray.find(answer => answer.correct);
+                    answers.push({ 'questionId': question.id, 'answered': (selected ? selected.id : null) });
+                  });
+                });
+        */
         this.questions = quiz;
         this.pager.count = this.questions.length;
         this.startTime = new Date();
@@ -93,10 +82,10 @@ this.router.navigate(['/dashboard'])
         }, 1000);
         this.duration = this.parseTime(this.config.duration);
         this.mode = 'quiz';
-      }
+
     });
 
-    }
+  }
 
   tick() {
     const now = new Date();
@@ -115,6 +104,7 @@ this.router.navigate(['/dashboard'])
     return `${mins}:${secs}`;
   }
 
+
   get filteredQuestions() {
     return (this.questions) ?
       this.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
@@ -122,7 +112,9 @@ this.router.navigate(['/dashboard'])
 
   onSelect(question: Question, answer: Answer) {
 
-      question.answers.forEach((x) => { if (x.id !== answer.id) x.selected = false; });
+    question.answers.forEach((x) => {
+      if (x.id !== answer.id) x.selected = false;
+    });
 
 
     if (this.config.autoMove) {
@@ -150,7 +142,7 @@ this.router.navigate(['/dashboard'])
     let answers = [];
     this.questions.forEach(question => {
       let selected = question.answers.find(answer => answer.selected);
-      answers.push({ 'questionId': question.id, 'answered': (selected ? selected.id : null) });
+      answers.push({'questionId': question.id, 'answered': (selected ? selected.id : null)});
     });
 
     this.quizService.submitQuiz({id: this.quiz.id, answers: answers})

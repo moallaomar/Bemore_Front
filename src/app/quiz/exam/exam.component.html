@@ -1,12 +1,19 @@
 <div class="container-fluid">
+
+
+  <div class="alert alert-danger alert-dismissible fade show" *ngIf="passed">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Attention ! </strong> Vous avez déja passé cet éxamen.
+  </div>
+
   <div id="quiz">
       <hr />
     <div *ngIf="mode=='quiz'">
     <div *ngFor="let question of filteredQuestions;">
       <div class="badge badge-info">Question {{pager.index + 1}} sur {{pager.count}}.</div>
-      <div *ngIf="config.duration" class="badge badge-info float-right">Time: {{ellapsedTime}} / {{config.duration}}</div>
+      <div *ngIf="config.duration" class="badge badge-info float-right">Timer: {{ellapsedTime}} / {{config.duration | minuteSeconds }}</div>
       <h3 class="font-weight-normal">{{pager.index + 1}}.
-        <span [innerHTML]="question.content"></span>
+        <span  [innerHTML]="question.content"></span>
       </h3>
       <div class="row text-left options">
         <div class="col-6" *ngFor="let option of question.answers">

@@ -28,6 +28,7 @@ import {AnswerService} from "./Service/answer.service";
 import { AddAnswerComponent } from './quiz/add-answer/add-answer.component';
 import { ListQuizComponent } from './quiz/list-quiz/list-quiz.component';
 import { ExamComponent } from './quiz/exam/exam.component';
+import {MinuteSecondsPipe} from "./quiz/Util/MinuteSecondsPipe";
 
 @NgModule({
     imports: [
@@ -44,11 +45,10 @@ import { ExamComponent } from './quiz/exam/exam.component';
         AppComponent,
         CommonLayoutComponent,
         AuthenticationLayoutComponent,
-        Sidebar_Directives,
-
+      Sidebar_Directives,
 
     ],
-    providers: [ ],
+    providers: [],
     bootstrap: [AppComponent],
 })
 
