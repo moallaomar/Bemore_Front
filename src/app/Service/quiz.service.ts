@@ -41,6 +41,9 @@ export class QuizService {
   findQuizAnswerByQuizUser(id:number){
     return this.http.get<QuizAnswer[]>(this.host2+'/quizanswers/'+id);
   }
+  getQuizby(id:number){
+    return this.http.get<Quiz>(this.host2+'/getquiz/'+id);
+  }
 
 
 

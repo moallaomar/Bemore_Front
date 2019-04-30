@@ -1,10 +1,9 @@
 <div class="container-fluid">
 
+  <h1 class="text-center font-weight-normal">{{name}}</h1>
+  <hr />
 
-  <div class="alert alert-danger alert-dismissible fade show" *ngIf="passed">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Attention ! </strong> Vous avez déja passé cet éxamen.
-  </div>
+
 
   <div id="quiz">
       <hr />
@@ -43,7 +42,8 @@
     </div>
   </div>
   <div class="result" *ngIf="mode=='result'">
-    <h2>Résultat du quiz</h2>
+    <h2>Résultat du quiz </h2>
+    <h2>score : {{this.score}} / {{pager.count}}</h2>
     <div *ngFor="let question of questions; let index = index">
       <div class="result-question">
         <h5>{{index + 1}}. {{question.content}}</h5>

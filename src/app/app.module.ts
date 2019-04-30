@@ -17,6 +17,7 @@ import {AppRoutes} from './app.routing';
 import {AppComponent} from './app.component';
 import {LoginModule} from './login/login.module';
 import {QuizModule} from "./quiz/quiz.modules";
+import { ListQuizuserComponent } from './quiz/list-quizuser/list-quizuser.component';
 
 @NgModule({
   imports: [

@@ -6,6 +6,7 @@ import {Quiz} from "../../Model/Quiz.model";
 import {Question} from "../../Model/question.model";
 import {QuizConfig} from "../../Model/quiz-config";
 import {Answer} from "../../Model/answer.model";
+import select = d3.select;
 
 @Component({
   selector: 'app-exam',
@@ -13,7 +14,7 @@ import {Answer} from "../../Model/answer.model";
   styleUrls: ['./exam.component.css']
 })
 export class ExamComponent implements OnInit {
-
+score:number = 0 ;
   mode = 'quiz';
   quiz: Quiz = new Quiz();
   config: QuizConfig = {
@@ -37,6 +38,7 @@ export class ExamComponent implements OnInit {
   };
   timer: any = null;
   startTime: Date;
+  name:string;
   endTime: Date;
   ellapsedTime = '00:00';
   duration = '';
@@ -54,7 +56,7 @@ export class ExamComponent implements OnInit {
     this.activatedRoute.paramMap.pipe(
       switchMap(params => {
         const id = +params.get("id");
-        this.quiz.id = id;
+      this.quiz.id = id;
         return this.quizService.getQuizbyId(id)// http request
       })
     ).subscribe(quiz => {
@@ -81,6 +83,7 @@ export class ExamComponent implements OnInit {
                   });
                 });
         */
+
         this.questions = quiz;
         this.pager.count = this.questions.length;
         this.startTime = new Date();
@@ -89,8 +92,15 @@ export class ExamComponent implements OnInit {
         }, 1000);
         this.duration = this.parseTime(this.config.duration);
         this.mode = 'quiz';
+
+
       }
+
     });
+    this.quizService.getQuizby(this.quiz.id).subscribe(data => {
+      this.name = data.name
+    });
+
 
   }
 
@@ -147,6 +157,24 @@ export class ExamComponent implements OnInit {
     });
 
     this.quizService.submitQuiz({id: this.quiz.id, answers: answers}).subscribe();
+
+    answers.forEach(elem => {
+      this.questions.forEach(el => {
+        el.answers.forEach(e => {
+          let selected = el.answers.find(answer => answer.selected);
+          if (elem.answered == null){
+            elem.answered = 0;
+          }
+          if (elem.answered != 0){
+
+          }
+        })
+      })
+    });
+
+
+
+
     this.mode = 'result'
   }
 }

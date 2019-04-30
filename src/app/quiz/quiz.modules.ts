@@ -22,6 +22,8 @@ import {AnswerService} from "../Service/answer.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "../Service/auth.interceptor";
 import {MinuteSecondsPipe} from "./Util/MinuteSecondsPipe";
+import {ListQuizuserComponent} from "./list-quizuser/list-quizuser.component";
+import {QuizUserService} from "../Service/quizuser.service";
 
 
 @NgModule({
@@ -45,8 +47,9 @@ import {MinuteSecondsPipe} from "./Util/MinuteSecondsPipe";
     ListQuizComponent,
     ExamComponent,
     MinuteSecondsPipe,
+    ListQuizuserComponent,
   ],
-  providers: [QuestionService,QuizService, AnswerService,
+  providers: [QuestionService,QuizService, AnswerService, QuizUserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

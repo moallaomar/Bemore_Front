@@ -1,10 +1,14 @@
 import {User} from "./user_model";
 import {Quiz} from "./Quiz.model";
+import {appUser} from "./appUser.model";
 
 export class QuizUser{
    id:number;
-   user:User;
+   appUser:appUser;
   quiz:Quiz;
+  score:number;
+  nbQuestion:number;
+  passedDateTime:Date;
 
   constructor(){
 
