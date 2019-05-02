@@ -11,52 +11,56 @@
                     <div class="card-body">
                       <div class="pdd-horizon-30 pdd-vertical-30">
                         <div class="mrg-btm-30">
-                          <img class="img-responsive inline-block" src="assets/images/logo/bemore-logo.jpg" alt="">
+                          <img alt="" class="img-responsive inline-block" src="assets/images/logo/bemore-logo.jpg">
                           <h2 class="inline-block pull-right no-mrg-vertical pdd-top-15">Inscription</h2>
                         </div>
 
-                        <p  class="mrg-btm-15 font-size-15">Veuillez saisir les informations pour s'inscrire </p>
+                        <p class="mrg-btm-15 font-size-15">Veuillez saisir les informations pour s'inscrire </p>
 
-                        <form class="needs-validation" [formGroup]="signupForm"
-                              (ngSubmit)="signup(v.value)" #v="ngForm">
+                        <form #v="ngForm" (ngSubmit)="signup(v.value)"
+                              [formGroup]="signupForm" class="needs-validation">
 
                           <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Login" ngModel=""
+                            <input [(ngModel)]="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" class="form-control" formControlName="username"
                                    name="username"
-                                   formControlName="username"
-                                   [(ngModel)]="username"
-                                   [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                                   ngModel=""
+                                   placeholder="Login"
+                                   type="text">
 
-                            <div  *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                              <div *ngIf="f.username.errors?.required" >Veuillez saisir le login</div>
+                            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                              <div *ngIf="f.username.errors?.required">Veuillez saisir le login</div>
                             </div>
                           </div>
 
                           <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Mot de passe" ngModel=""
+                            <input [(ngModel)]="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="form-control" formControlName="password"
                                    name="password"
-                                   formControlName="password"
-                                   [(ngModel)]="password"
-                                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                                   ngModel=""
+                                   placeholder="Mot de passe"
+                                   type="password">
                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                               <div *ngIf="f.password.errors?.required">Veuillez saisir le mot de passe</div>
                             </div>
                           </div>
                           <div class="form-group">
-                            <input type="password" [(ngModel)]="confirmedPassword" formControlName="confirmedPassword" placeholder="Confirmer le mot de passe" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmedPassword.errors }" />
+                            <input [(ngModel)]="confirmedPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmedPassword.errors }" class="form-control"
+                                   formControlName="confirmedPassword" placeholder="Confirmer le mot de passe"
+                                   type="password"/>
                             <div *ngIf="submitted && f.confirmedPassword.errors" class="invalid-feedback">
-                              <div *ngIf="f.confirmedPassword.errors.required">Veuillez confirmer votre mot de passe</div>
-                              <div *ngIf="f.confirmedPassword.errors.mustMatch">Les mots de passe doivent concorder</div>
+                              <div *ngIf="f.confirmedPassword.errors.required">Veuillez confirmer votre mot de passe
+                              </div>
+                              <div *ngIf="f.confirmedPassword.errors.mustMatch">Les mots de passe doivent concorder
+                              </div>
                             </div>
                           </div>
-                            <div class="inline-block">
+                          <div class="inline-block">
 
 
-                            </div>
+                          </div>
 
 
                           <div class="pull-right">
-                            <a href="" [routerLink]="['/login']" >Se connecter</a>
+                            <a [routerLink]="['/login']" href="">Se connecter</a>
                           </div>
 
                           <div class="mrg-top-20 text-right">

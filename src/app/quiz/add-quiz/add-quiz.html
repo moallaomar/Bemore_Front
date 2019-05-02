@@ -9,7 +9,7 @@
           <div class="row relative">
             <div class="col-md-10 ml-auto mr-auto">
 
-              <form role="form" (ngSubmit)="NewQuiz(v.value)" [formGroup]="quizForm" #v="ngForm">
+              <form #v="ngForm" (ngSubmit)="NewQuiz(v.value)" [formGroup]="quizForm" role="form">
                 <div class="row mrg-top-40">
                   <div class="col-md-12">
                     <div class="col-md-8 ml-auto mr-auto">
@@ -21,8 +21,11 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label>Nom</label>
-                            <input class="form-control"  [(ngModel)]="name"  [ngClass]="{'error' : name?.errors?.minlength}" placeholder="Nom du quiz" type="text"   formControlName="name" minlength="4"/>
-                            <label class="error"  *ngIf="name?.errors?.minlength" >Veuillez saisir 4 caractères minimum.</label>
+                            <input [(ngModel)]="name" [ngClass]="{'error' : name?.errors?.minlength}"
+                                   class="form-control" formControlName="name" minlength="4"
+                                   placeholder="Nom du quiz" type="text"/>
+                            <label *ngIf="name?.errors?.minlength" class="error">Veuillez saisir 4 caractères
+                              minimum.</label>
                           </div>
                         </div>
                       </div>
@@ -31,8 +34,11 @@
                           <div class="form-group">
                             <label for="form-1-5">Description</label>
                             <div class="col-md-12">
-                              <textarea [(ngModel)]="description"  [ngClass]="{'error' : description?.errors?.minlength}" placeholder="Description du quiz" class="form-control" rows="2" id="form-1-5" formControlName="description"  name="description" minlength="4"></textarea>
-                              <label class="error" *ngIf="description?.errors?.minlength" >Veuillez saisir 4 caractères minimum.</label>
+                              <textarea [(ngModel)]="description" [ngClass]="{'error' : description?.errors?.minlength}"
+                                        class="form-control" formControlName="description" id="form-1-5" minlength="4"
+                                        name="description" placeholder="Description du quiz" rows="2"></textarea>
+                              <label *ngIf="description?.errors?.minlength" class="error">Veuillez saisir 4 caractères
+                                minimum.</label>
                             </div>
                           </div>
                         </div>
@@ -42,7 +48,7 @@
 
                 </div>
                 <div class="mrg-top-20">
-                  <button type="submit" class="btn btn-info button-next pull-right btn-rounded">Suivant</button>
+                  <button class="btn btn-info button-next pull-right btn-rounded" type="submit">Suivant</button>
                 </div>
               </form>
             </div>

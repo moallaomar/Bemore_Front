@@ -1,67 +1,73 @@
 <div class="container-fluid">
 
   <h1 class="text-center font-weight-normal">{{name}}</h1>
-  <hr />
-
+  <hr/>
 
 
   <div id="quiz">
-      <hr />
+    <hr/>
     <div *ngIf="mode=='quiz'">
-    <div *ngFor="let question of filteredQuestions;">
-      <div class="badge badge-info">Question {{pager.index + 1}} sur {{pager.count}}.</div>
-      <div *ngIf="config.duration" class="badge badge-info float-right">Timer: {{ellapsedTime}} / {{config.duration | minuteSeconds }}</div>
-      <h3 class="font-weight-normal">{{pager.index + 1}}.
-        <span  [innerHTML]="question.content"></span>
-      </h3>
+      <div *ngFor="let question of filteredQuestions;">
+        <div class="badge badge-info">Question {{pager.index + 1}} sur {{pager.count}}.</div>
+        <div *ngIf="config.duration" class="badge badge-info float-right">Timer: {{ellapsedTime}}
+          / {{config.duration | minuteSeconds }}</div>
+        <h3 class="font-weight-normal">{{pager.index + 1}}.
+          <span [innerHTML]="question.content"></span>
+        </h3>
 
-      <div class="row text-left options">
-        <div class="col-6" *ngFor="let option of question.answers">
-          <div class="option">
-            <br/>
-            <label class="font-weight-normal bg-light"  [attr.for]="option.id">
-              <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);" /> {{option.content}}
-            </label>
+        <div class="row text-left options">
+          <div *ngFor="let option of question.answers" class="col-6">
+            <div class="option">
+              <br/>
+              <label [attr.for]="option.id" class="font-weight-normal bg-light">
+                <input (change)="onSelect(question, option);" [(ngModel)]="option.selected" id="{{option.id}}"
+                       type="checkbox"/> {{option.content}}
+              </label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <hr />
-    <div class="text-center">
-      <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(0);">Premier</button>
-      <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Précédent</button>
-      <button class="btn btn-info" (click)="goTo(pager.index + 1);">Suivant</button>
-      <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.count - 1);">Dernier</button>
-      <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
-    </div>
-  </div>
-
-  <div class="row text-center" *ngIf="mode=='review'">
-    <div class="col-4 cursor-pointer" *ngFor="let question of questions; let index = index;">
-      <div (click)="goTo(index)" class="p-3 mb-2 {{ isAnswered(question) == 'Répondu'? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(question) }}</div>
-    </div>
-  </div>
-  <div class="result" *ngIf="mode=='result'">
-    <h2>Résultat du quiz </h2>
-    <h2>score : {{this.score}} / {{pager.count}}</h2>
-    <div *ngFor="let question of questions; let index = index">
-      <div class="result-question">
-        <h5>{{index + 1}}. {{question.content}}</h5>
-        <div class="row">
-          <div class="col-6" *ngFor="let answers of question.answers">
-            <input id="{{answers.id}}" type="checkbox" disabled="disabled" [(ngModel)]="answers.selected" /> {{answers.content}}
-          </div>
-        </div>
-        <div class="p-1 m-2 alert {{ isCorrect(question) == 'correcte'? 'alert-success': 'alert-danger'}}">Votre réponse est  {{isCorrect(question)}}.</div>
+      <hr/>
+      <div class="text-center">
+        <button (click)="goTo(0);" *ngIf="config.allowBack" class="btn btn-default">Premier</button>
+        <button (click)="goTo(pager.index - 1);" *ngIf="config.allowBack" class="btn btn-default">Précédent</button>
+        <button (click)="goTo(pager.index + 1);" class="btn btn-info">Suivant</button>
+        <button (click)="goTo(pager.count - 1);" *ngIf="config.allowBack" class="btn btn-default">Dernier</button>
+        <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
       </div>
     </div>
-    <h4 class="alert alert-info text-center">Vous pouvez quitter la session.</h4>
+
+    <div *ngIf="mode=='review'" class="row text-center">
+      <div *ngFor="let question of questions; let index = index;" class="col-4 cursor-pointer">
+        <div (click)="goTo(index)"
+             class="p-3 mb-2 {{ isAnswered(question) == 'Répondu'? 'bg-info': 'bg-warning' }}">{{index + 1}}
+          . {{ isAnswered(question) }}</div>
+      </div>
+    </div>
+    <div *ngIf="mode=='result'" class="result">
+      <h2>Résultat du quiz </h2>
+      <h2>score : {{this.score}} / {{pager.count}}</h2>
+      <div *ngFor="let question of questions; let index = index">
+        <div class="result-question">
+          <h5>{{index + 1}}. {{question.content}}</h5>
+          <div class="row">
+            <div *ngFor="let answers of question.answers" class="col-6">
+              <input [(ngModel)]="answers.selected" disabled="disabled" id="{{answers.id}}"
+                     type="checkbox"/> {{answers.content}}
+            </div>
+          </div>
+          <div class="p-1 m-2 alert {{ isCorrect(question) == 'correcte'? 'alert-success': 'alert-danger'}}">Votre
+            réponse est  {{isCorrect(question)}}.
+          </div>
+        </div>
+      </div>
+      <h4 class="alert alert-info text-center">Vous pouvez quitter la session.</h4>
+    </div>
+    <hr/>
+    <div *ngIf="mode!='result'">
+      <button (click)="mode = 'quiz'" class="btn btn-default">Quiz</button>
+      <button (click)="mode = 'review'" class="btn btn-info">Revue</button>
+      <button (click)="onSubmit();" class="btn btn-lg btn-outline-primary">Soumettre le quiz</button>
+    </div>
   </div>
-  <hr />
-  <div *ngIf="mode!='result'">
-    <button class="btn btn-default" (click)="mode = 'quiz'">Quiz</button>
-    <button class="btn btn-info" (click)="mode = 'review'">Revue</button>
-    <button class="btn btn-lg btn-outline-primary" (click)="onSubmit();">Soumettre le quiz</button>
-  </div>
-</div>
 </div>

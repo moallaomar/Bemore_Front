@@ -6,30 +6,33 @@ import {Question} from "../Model/question.model";
   providedIn: 'root'
 })
 export class QuestionService {
-  host2:string = "http://localhost:8080";
+  host2: string = "http://localhost:8080";
 
 
-  constructor(private http:HttpClient){
+  constructor(private http: HttpClient) {
 
   }
 
-  getQuestion(){
-    return  this.http.get<Question[]>(this.host2+'/questions');
+  getQuestion() {
+    return this.http.get<Question[]>(this.host2 + '/questions');
   }
 
-  createQuestion(question : Question, id:number){
+  createQuestion(question: Question, id: number) {
 
-    return this.http.post<Question>(this.host2+'/question/'+id , question);
+    return this.http.post<Question>(this.host2 + '/question/' + id, question);
   }
-getQuestionByID(id:number){
-    return this.http.get<Question>(this.host2+'/question/'+id);
-}
-deleteQuestionById(id : number) {
-  return this.http.delete(this.host2 + '/question'+'/' + id);
-}
-getLastId(){
-    return this.http.get<number>(this.host2+'/question/count')
-}
+
+  getQuestionByID(id: number) {
+    return this.http.get<Question>(this.host2 + '/question/' + id);
+  }
+
+  deleteQuestionById(id: number) {
+    return this.http.delete(this.host2 + '/question' + '/' + id);
+  }
+
+  getLastId() {
+    return this.http.get<number>(this.host2 + '/question/count')
+  }
 
 
 }

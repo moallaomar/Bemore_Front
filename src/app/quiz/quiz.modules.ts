@@ -15,7 +15,6 @@ import {JwBootstrapSwitchNg2Module} from "jw-bootstrap-switch-ng2";
 import {ListQuizComponent} from "./list-quiz/list-quiz.component";
 import {DataTablesModule} from "angular-datatables";
 import {ExamComponent} from "./exam/exam.component";
-import {AuthenticationService} from "../Service/authentication.service";
 import {QuestionService} from "../Service/question.service";
 import {QuizService} from "../Service/quiz.service";
 import {AnswerService} from "../Service/answer.service";
@@ -27,6 +26,7 @@ import {QuizUserService} from "../Service/quizuser.service";
 import localeFr from '@angular/common/locales/fr'
 
 registerLocaleData(localeFr, 'fr');
+
 @NgModule({
   imports: [
     RouterModule.forChild(QuizRoutes),
@@ -50,14 +50,14 @@ registerLocaleData(localeFr, 'fr');
     MinuteSecondsPipe,
     ListQuizuserComponent,
   ],
-  providers: [QuestionService,QuizService, AnswerService, QuizUserService,
-    {provide: LOCALE_ID, useValue: 'fr' },
+  providers: [QuestionService, QuizService, AnswerService, QuizUserService,
+    {provide: LOCALE_ID, useValue: 'fr'},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }, ],
-  bootstrap:    [ AddQuizComponent],
+    },],
+  bootstrap: [AddQuizComponent],
 
 })
 export class QuizModule {

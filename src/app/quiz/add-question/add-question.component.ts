@@ -40,8 +40,7 @@ export class AddQuestionComponent implements OnInit {
       this.question.content = newQuestion.toString();
 
       this.questionService.getLastId().subscribe(data => {
-        this.question.id = data + 1
-      });
+        this.question.id = data + 1});
       this.questions.push(this.question);
       this.questionService.createQuestion(this.question, this.id).subscribe()
 

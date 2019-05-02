@@ -9,15 +9,21 @@ import {Router} from "@angular/router";
   templateUrl: 'add-quiz.html'
 })
 
-export class AddQuizComponent implements OnInit{
+export class AddQuizComponent implements OnInit {
   submitted = false;
   name: string;
 
   description: string;
 
   quizForm: FormGroup;
+  quiz: Quiz = new Quiz();
+  public isCompleted: any;
+  public onStep2Next: any;
+  public onStep3Next: any;
+  public onComplete: any;
+  display: boolean = false;
 
-  constructor(private quizService: QuizService, private questionService: QuestionService,private formBuilder: FormBuilder,private router:Router) {
+  constructor(private quizService: QuizService, private questionService: QuestionService, private formBuilder: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -27,44 +33,30 @@ export class AddQuizComponent implements OnInit{
     });
   }
 
-
-  quiz: Quiz = new Quiz();
-
-
-
-
-
-  public isCompleted: any;
-  public onStep2Next: any;
-  public onStep3Next: any;
-  public onComplete: any;
-  display: boolean = false;
-
   NewQuiz(data) {
 
-      this.name = data.name;
-      console.log(data);
-      this.quizService.isQuizName(this.name).subscribe(res => {
+    this.name = data.name;
+    console.log(data);
+    this.quizService.isQuizName(this.name).subscribe(res => {
 
-        if (res.toString() == "true") {
-          console.log('famma menou');
-          this.display == true;
-          this.submitted = false
+      if (res.toString() == "true") {
+        console.log('famma menou');
+        this.display == true;
+        this.submitted = false
 
 
-        } else {
+      } else {
 
-          this.quizService.getLastQuiz().subscribe(data => this.quiz.id = data.id + 1);
+        this.quizService.getLastQuiz().subscribe(data => this.quiz.id = data.id + 1);
 
-          this.quiz.name = data.name;
-          this.quiz.description= data.description;
-            console.log(this.quiz);
-          this.quizService.createQuiz(this.quiz).subscribe(succ =>
-          this.router.navigateByUrl('/quiz/add-question/'+this.quiz.id)
-
-          );
-        }
-      })
+        this.quiz.name = data.name;
+        this.quiz.description = data.description;
+        console.log(this.quiz);
+        this.quizService.createQuiz(this.quiz).subscribe(succ =>
+          this.router.navigateByUrl('/quiz/add-question/' + this.quiz.id)
+        );
+      }
+    })
 
   }
 

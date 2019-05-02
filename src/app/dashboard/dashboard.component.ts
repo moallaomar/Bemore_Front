@@ -53,8 +53,6 @@ export class DashboardComponent {
   }
 
   redirect(data) {
-
-
     this.quizService.getQuizbyId(data).subscribe(quiz => {
       if (quiz == null) {
         this.display = true;
@@ -62,7 +60,6 @@ export class DashboardComponent {
         this.router.navigate(['/quiz/exam/', data])
       }
     });
-
   }
 
   isAdmin() {

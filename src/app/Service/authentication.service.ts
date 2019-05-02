@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpBackend, HttpClient} from "@angular/common/http";
-import { JwtHelperService } from '@auth0/angular-jwt';
-import {observable} from "rxjs";
+import {JwtHelperService} from '@auth0/angular-jwt';
 import {User} from "../Model/user_model";
 import {UserForm} from "../Model/UserForm";
 
@@ -9,36 +8,40 @@ import {UserForm} from "../Model/UserForm";
   providedIn: 'root'
 })
 export class AuthenticationService {
-  redirectUrl:String;
+  redirectUrl: String;
   currentUser: User;
-    host2:string = "http://localhost:8080";
-  private  jwt:string;
-  private  username:string;
-  private roles:Array<any>=[];
+  host2: string = "http://localhost:8080";
+  private jwt: string;
+  private username: string;
+  private roles: Array<any> = [];
   private httpClient: HttpClient;
 
-  constructor(private http:HttpClient,  handler: HttpBackend) {
+  constructor(private http: HttpClient, handler: HttpBackend) {
     this.httpClient = new HttpClient(handler);
   }
 
+  get isLoggedIn(): boolean {
+    return !!this.currentUser;
+  }
 
-  register(data){
+  register(data) {
     console.log(data);
-    return this.httpClient.post<UserForm>(this.host2+"/register", data )
+    return this.httpClient.post<UserForm>(this.host2 + "/register", data)
   }
 
-  login(data){
+  login(data) {
 
-    return this.http.post(this.host2+"/login", data, {observe: 'response'});
+    return this.http.post(this.host2 + "/login", data, {observe: 'response'});
   }
-saveToken(jwt:string){
+
+  saveToken(jwt: string) {
     this.jwt = jwt;
     localStorage.setItem("token", jwt);
-  let jwtHelper = new JwtHelperService();
+    let jwtHelper = new JwtHelperService();
     this.roles = jwtHelper.decodeToken(this.jwt).roles;
-    }
+  }
 
-  loadToken(){
+  loadToken() {
     this.jwt = localStorage.getItem('token');
     return this.jwt;
   }
@@ -47,11 +50,9 @@ saveToken(jwt:string){
     localStorage.removeItem('token');
 
   }
-  getCurrentUser(){
-   return  this.http.get(this.host2+'/current');
-  }
-  get isLoggedIn(): boolean {
-    return !!this.currentUser;
+
+  getCurrentUser() {
+    return this.http.get(this.host2 + '/current');
   }
 
 }

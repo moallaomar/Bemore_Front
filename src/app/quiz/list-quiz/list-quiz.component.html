@@ -7,14 +7,14 @@
       <div class="card">
         <div class="card-block">
           <div class="table-overflow">
-<div class="row">
-  <div class="mrg-right-20">
-  <input type="text" class="form-control mr-1"
-        placeholder="Filtrer par Nom : "
-         [(ngModel)]="listFilter" />
+            <div class="row">
+              <div class="mrg-right-20">
+                <input [(ngModel)]="listFilter" class="form-control mr-1"
+                       placeholder="Filtrer par Nom : "
+                       type="text"/>
 
-  </div>
-</div>
+              </div>
+            </div>
             <br>
             <table class="table table-lg table-hover">
               <thead>
@@ -26,14 +26,14 @@
               </tr>
               </thead>
               <tbody>
-              <tr  *ngFor="let q of filtredQuiz">
+              <tr *ngFor="let q of filtredQuiz">
                 <td>
-                  <div class="relative mrg-top-20" >
+                  <div class="relative mrg-top-20">
                     <span class="title">{{q.name}}</span>
                   </div>
                 </td>
                 <td>
-                  <div class="relative mrg-top-20" >
+                  <div class="relative mrg-top-20">
                     <span class="title">{{q.createdDate | date}}</span>
                   </div>
                 </td>
@@ -45,13 +45,13 @@
                 <td>
                   <div class="relative mrg-top-15">
                     <div class="d-inline p-1">
-                    <a  id="delete" class="btn btn-danger" (click)="deleteQuiz(q.id)">
-                      <i class="ti-trash pdd-right-5 " id="supp"  ></i>
-                      <span id="supp">Supprimer</span>
-                    </a>
+                      <a (click)="deleteQuiz(q.id)" class="btn btn-danger" id="delete">
+                        <i class="ti-trash pdd-right-5 " id="supp"></i>
+                        <span id="supp">Supprimer</span>
+                      </a>
                     </div>
                     <div class="d-inline p-1">
-                      <a class="btn btn-info" [routerLink]="['/quiz/add-question',q.id]">
+                      <a [routerLink]="['/quiz/add-question',q.id]" class="btn btn-info">
                         <i class="ti-pencil pdd-right-5"></i>
                         <span>Modifier</span>
                       </a>

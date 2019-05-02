@@ -1,11 +1,11 @@
 export class Role {
 
 
+  private id: number
+  private roleName: String;
+
   constructor() {
   }
-
-private id:number
-private roleName:String;
 
 
 }
@@ -13,8 +13,9 @@ private roleName:String;
 
 export class authorities {
 
+  authority: String;
+
   constructor() {
   }
-  authority: String;
 
 }

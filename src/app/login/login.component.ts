@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators,} from "@angular/forms";
 import {AuthenticationService} from "../Service/authentication.service";
@@ -15,7 +15,13 @@ export class LoginComponent implements OnInit {
 
   password: string;
   loginForm: FormGroup;
-  constructor(private authService: AuthenticationService, private router:Router, private formBuilder: FormBuilder) { }
+
+  constructor(private authService: AuthenticationService, private router: Router, private formBuilder: FormBuilder) {
+  }
+
+  get f() {
+    return this.loginForm.controls;
+  }
 
   ngOnInit() {
 
@@ -25,9 +31,8 @@ export class LoginComponent implements OnInit {
     });
 
   }
-  get f() { return this.loginForm.controls; }
 
-  onLogin(data){
+  onLogin(data) {
 
     this.submitted = true;
     this.authService.login(data)
@@ -42,8 +47,7 @@ export class LoginComponent implements OnInit {
       })
 
 
-}
-
+  }
 
 
 }

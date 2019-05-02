@@ -5,14 +5,13 @@ import {QuizUser} from "./QuizUser";
 export class QuizAnswer {
 
 
-  id:number;
+  id: number;
+  quizUser: QuizUser;
+  question: Question;
 
-  quizUser:QuizUser ;
-   question:Question;
+  selectedAnswer: Answer;
 
-  selectedAnswer: Answer ;
-
-  constructor(){
+  constructor() {
 
   }
 

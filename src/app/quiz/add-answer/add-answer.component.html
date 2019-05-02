@@ -15,50 +15,47 @@
                   <div class="row">
                     <div class="form-inline">
                       <div class="d-inline p-2">
-                      <input #newAnswer class="form-control mr-1"
-                             (keyup.enter)="addAnswer(newAnswer.value)"
-                              />
+                        <input #newAnswer (keyup.enter)="addAnswer(newAnswer.value)"
+                               class="form-control mr-1"
+                        />
                       </div>
 
                       <div class="d-inline p-2">
-                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
-                          <label ngbButtonLabel class="btn-info btn-sm">
-                            <input ngbButton type="radio"  (click)="setTrue()"  value=1>Correct
+                        <div [(ngModel)]="model" class="btn-group btn-group-toggle" name="radioBasic" ngbRadioGroup>
+                          <label class="btn-info btn-sm" ngbButtonLabel>
+                            <input (click)="setTrue()" ngbButton type="radio" value=1>Correct
                           </label>
-                          <label ngbButtonLabel class="btn-info btn-sm">
-                            <input ngbButton type="radio" (click)="setFalse()"> Incorrect
+                          <label class="btn-info btn-sm" ngbButtonLabel>
+                            <input (click)="setFalse()" ngbButton type="radio"> Incorrect
                           </label>
 
                         </div>
                       </div>
                       <div class="d-inline p-2">
-                      <button class="btn btn-info"  (click)="addAnswer(newAnswer.value)">Ajouter une réponse</button>
+                        <button (click)="addAnswer(newAnswer.value)" class="btn btn-info">Ajouter une réponse</button>
                       </div>
                     </div>
                   </div>
 
 
-
-                  <div class="row" *ngFor="let ans of answers ;let idx = index" >
+                  <div *ngFor="let ans of answers ;let idx = index" class="row">
                     <div class="d-inline p-2">
-                    <label>{{ans.content}}</label>
-                    </div>
-                    <div class="d-inline p-2">
-                    <button type="button" class="btn-info btn-sm" (click)="deleteAnswer(ans)" >Supprimer</button>
+                      <label>{{ans.content}}</label>
                     </div>
                     <div class="d-inline p-2">
-                    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="ans.correct">
-                      <label ngbButtonLabel class="btn-info btn-sm">
-                        <input ngbButton type="radio" value="{{ans.correct}}">Correct
-                      </label>
-                      <label ngbButtonLabel class="btn-info btn-sm">
-                        <input ngbButton type="radio" value="{{ans.correct}}"> Incorrect
-                      </label>
-
+                      <button (click)="deleteAnswer(ans)" class="btn-info btn-sm" type="button">Supprimer</button>
                     </div>
+                    <div class="d-inline p-2">
+                      <div [(ngModel)]="ans.correct" class="btn-group btn-group-toggle" name="radioBasic" ngbRadioGroup>
+                        <label class="btn-info btn-sm" ngbButtonLabel>
+                          <input ngbButton type="radio" value="{{ans.correct}}">Correct
+                        </label>
+                        <label class="btn-info btn-sm" ngbButtonLabel>
+                          <input ngbButton type="radio" value="{{ans.correct}}"> Incorrect
+                        </label>
+
+                      </div>
                     </div>
-
-
 
 
                   </div>

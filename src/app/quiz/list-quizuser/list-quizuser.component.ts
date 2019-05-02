@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {QuizUserService} from "../../Service/quizuser.service";
-import {User} from "../../Model/user_model";
 import {QuizUser} from "../../Model/QuizUser";
-import {Quiz} from "../../Model/Quiz.model";
 
 @Component({
   selector: 'app-list-quizuser',
@@ -12,9 +10,15 @@ import {Quiz} from "../../Model/Quiz.model";
 export class ListQuizuserComponent implements OnInit {
 
 
- quizUsers : QuizUser[] = [];
-username: string[] = [];
+  quizUsers: QuizUser[] = [];
+  username: string[] = [];
+  filtredQuizUser: QuizUser[] = [];
+
+  constructor(private quizUserService: QuizUserService) {
+  }
+
   _listFilter = '';
+
   get listFilter(): string {
     return this._listFilter;
   }
@@ -23,12 +27,6 @@ username: string[] = [];
     this._listFilter = value;
     this.filtredQuizUser = this.listFilter ? this.performFilter(this.listFilter) : this.quizUsers;
   }
-
-  filtredQuizUser: QuizUser[] = [];
-
-
-  constructor(private quizUserService: QuizUserService) { }
-
 
   performFilter(filterBy: string): QuizUser[] {
     filterBy = filterBy.toLocaleLowerCase();
@@ -40,7 +38,6 @@ username: string[] = [];
 
     this.quizUserService.findAll().subscribe(data => {
       this.quizUsers = data;
-
       this.filtredQuizUser = this.performFilter(this.listFilter);
     });
   }

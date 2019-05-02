@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {User} from '../Model/user_model';
 import {CurrentUser} from '../Model/currentUser';
@@ -11,23 +11,21 @@ import {AuthenticationService} from '../Service/authentication.service';
 })
 
 export class CommonLayoutComponent implements OnInit {
-  private roles: Array<any> = [];
-
   dataLoaded: any = 0;
-  private user: User;
-  private role: String;
-  private currentUser: CurrentUser;
-  public username : String;
-  public app : any;
+  public username: String;
+  public app: any;
   public headerThemes: any;
   public changeHeader: any;
   public sidenavThemes: any;
   public changeSidenav: any;
   public headerSelected: any;
-  public sidenavSelected : any;
-  public searchActived : any;
+  public sidenavSelected: any;
+  public searchActived: any;
   public searchModel: any;
-
+  private roles: Array<any> = [];
+  private user: User;
+  private role: String;
+  private currentUser: CurrentUser;
 
   constructor(private route: Router, private authService: AuthenticationService) {
     this.app = {
@@ -40,7 +38,6 @@ export class CommonLayoutComponent implements OnInit {
         searchActived: false
       }
     };
-
 
 
     this.headerThemes = ['header-default', 'header-primary', 'header-info', 'header-success', 'header-danger', 'header-dark'];
@@ -58,7 +55,7 @@ export class CommonLayoutComponent implements OnInit {
     }
   }
 
-  logOut(){
+  logOut() {
     localStorage.removeItem('token');
     this.currentUser = null;
     this.route.navigateByUrl('/login');
@@ -72,16 +69,17 @@ export class CommonLayoutComponent implements OnInit {
     this.authService.getCurrentUser().subscribe(data => {
 
       this.currentUser = data as CurrentUser;
-      this.roles =  this.currentUser.authorities;
+      this.roles = this.currentUser.authorities;
       this.dataLoaded = 1;
       this.username = this.currentUser.name.toLowerCase();
 
     });
   }
 
-  isAdmin(){
-    for (let r of this.roles){
-      if (r.authority == 'ADMIN'){return true;
+  isAdmin() {
+    for (let r of this.roles) {
+      if (r.authority == 'ADMIN') {
+        return true;
       }
     }
     return false;
@@ -90,6 +88,7 @@ export class CommonLayoutComponent implements OnInit {
   isAuthenticated() {
     return this.roles && (this.isAdmin() || this.isUser());
   }
+
   isUser() {
     for (let r of this.roles) {
       if (r.authority == 'USER') {

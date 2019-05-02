@@ -1,56 +1,56 @@
-<div class="app" [ngClass]="
+<div [ngClass]="
     {
         'is-collapsed': app.layout.isMenuCollapsed,
         'is-opened': app.layout.isMenuOpened,
         'rtl' : app.layout.rtlActived
-    }">
-  <div class="layout" [ngClass]="headerSelected">
+    }" class="app">
+  <div [ngClass]="headerSelected" class="layout">
 
     <div [ngClass]="sidenavSelected">
       <!-- Side Nav START -->
       <div class="side-nav" sideBar>
         <div class="side-nav-inner">
           <div class="side-nav-logo">
-            <a href="" [routerLink]="['/dashboard']">
+            <a [routerLink]="['/dashboard']" href="">
               <div class="logo " style="background-image: url('assets/images/logo/bemore-logo.png')"></div>
             </a>
             <div class="mobile-toggle side-nav-toggle">
-              <a href="javascript:void(0);" (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
+              <a (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed" href="javascript:void(0);">
                 <i class="ti-arrow-circle-left"></i>
               </a>
             </div>
           </div>
           <ul class="side-nav-menu scrollable">
             <li clas="nav-item" routerLinkActive="active">
-              <a *ngIf="isUser()"  class="mrg-top-30" href="" [routerLink]="['/dashboard']">
+              <a *ngIf="isUser()" [routerLink]="['/dashboard']" class="mrg-top-30" href="">
                                 <span class="icon-holder">
                                     <i class="ti-home"></i>
                                 </span>
                 <span class="title">Accueil</span>
               </a>
             </li>
-            <li clas="nav-item" routerLinkActive="active" *ngIf="isAdmin()" >
-              <a *ngIf="isUser()"  class="mrg-top-30" href="" [routerLink]="['/quiz/add-quiz']">
+            <li *ngIf="isAdmin()" clas="nav-item" routerLinkActive="active">
+              <a *ngIf="isUser()" [routerLink]="['/quiz/add-quiz']" class="mrg-top-30" href="">
                                 <span class="icon-holder">
                                     <i class="ti-file"></i>
                                 </span>
                 <span class="title">Ajouter un test</span>
               </a>
             </li>
-            <li clas="nav-item" routerLinkActive="active" *ngIf="isAdmin()" >
-              <a *ngIf="isUser()"  class="mrg-top-30" href="" [routerLink]="['/quiz/list-quiz']">
+            <li *ngIf="isAdmin()" clas="nav-item" routerLinkActive="active">
+              <a *ngIf="isUser()" [routerLink]="['/quiz/list-quiz']" class="mrg-top-30" href="">
                                 <span class="icon-holder">
                                     <i class="ti-list"></i>
                                 </span>
                 <span class="title">Afficher les tests</span>
               </a>
             </li>
-            <li clas="nav-item" routerLinkActive="active" *ngIf="isAdmin()" >
-              <a *ngIf="isUser()"  class="mrg-top-30" href="" [routerLink]="['/quiz/list-quizuser']">
+            <li *ngIf="isAdmin()" clas="nav-item" routerLinkActive="active">
+              <a *ngIf="isUser()" [routerLink]="['/quiz/list-quizuser']" class="mrg-top-30" href="">
                                 <span class="icon-holder">
                                     <i class="ti-stats-up"></i>
                                 </span>
-                <span class="title">Afficher les Résultat</span>
+                <span class="title">Afficher les résultat</span>
               </a>
             </li>
 
@@ -67,7 +67,8 @@
           <div class="header-container">
             <ul class="nav-left">
               <li>
-                <a class="side-nav-toggle" href="javascript:void(0);" (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
+                <a (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed" class="side-nav-toggle"
+                   href="javascript:void(0);">
                   <i class="ti-view-grid"></i>
                 </a>
               </li>
@@ -76,11 +77,11 @@
 
               <!-- User profile dropdown -->
               <li class="user-profile dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="">
 
-                  <img class="profile-img img-fluid" src="assets/images/avatars/user-1.jpg" alt="profil_picture">
+                  <img alt="profil_picture" class="profile-img img-fluid" src="assets/images/avatars/user-1.jpg">
                   <div class="user-info">
-                    <span class="name pdd-right-5" *ngIf="dataLoaded == 1"> Bonjour {{username}} </span>
+                    <span *ngIf="dataLoaded == 1" class="name pdd-right-5"> Bonjour {{username}} </span>
                     <i class="ti-angle-down font-size-10"></i>
                   </div>
                 </a>
@@ -88,19 +89,19 @@
                 <ul class="dropdown-menu">
                   <!-- User profile  -->
                   <li>
-                    <a href="" [routerLink]="['/user/profile']">
+                    <a [routerLink]="['/user/profile']" href="">
                       <i class="ti-user pdd-right-10"></i>
                       <span>Profil</span>
                     </a>
                   </li>
                   <!-- User Inbox -->
 
-                  <li role="separator" class="divider">
+                  <li class="divider" role="separator">
 
                   </li>
                   <!-- LogOut User -->
                   <li>
-                    <a style="cursor: pointer" (click)="logOut()">
+                    <a (click)="logOut()" style="cursor: pointer">
                       <i class="ti-power-off pdd-right-10"></i>
                       <span>Logout</span>
                     </a>

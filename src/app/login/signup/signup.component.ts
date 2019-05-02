@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MustMatch} from "./mustmatch";
@@ -14,33 +14,41 @@ export class SignupComponent implements OnInit {
   username: string;
   password: string;
   submitted = false;
-  confirmedPassword:string
-  userform : UserForm;
+  confirmedPassword: string
+  userform: UserForm;
   signupForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,private authService: AuthenticationService, private router:Router) { }
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private router: Router) {
+  }
+
+  get f() {
+    return this.signupForm.controls;
+  }
 
   ngOnInit() {
 
 
     this.signupForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-        confirmedPassword: ['', Validators.required]},
-      {validator: MustMatch('password', 'confirmedPassword')
-    });
+        username: ['', Validators.required],
+        password: ['', Validators.required],
+        confirmedPassword: ['', Validators.required]
+      },
+      {
+        validator: MustMatch('password', 'confirmedPassword')
+      });
   }
-  get f() { return this.signupForm.controls; }
 
-  signup(data){
+  signup(data) {
 
     this.submitted = true;
 
 
     this.authService.register(data).subscribe(resp => {
 
-      this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/login');
       }, error1 => {
-      console.log("erreur");}
+        console.log("erreur");
+      }
     );
     if (this.signupForm.invalid) {
       console.log('invalid broooooooo !!!!!');

@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router){
+  constructor(private router: Router) {
 
   }
 
@@ -16,25 +16,23 @@ export class AuthInterceptor implements HttpInterceptor {
     const access_token = localStorage.getItem('token');
 
 
-
     // Clone the request to add the new header.
-    const authReq = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + access_token)});
+    const authReq = req.clone({headers: req.headers.set('Authorization', 'Bearer ' + access_token)});
 
 
     //send the newly created request
     return next.handle(authReq)
       .catch(err => {
-        // onError
-        //console.log(err);
+
         if (err instanceof HttpErrorResponse) {
-      //    console.log(err.status);
+          //    console.log(err.status);
           // console.log(err.statusText);
           if (err.status === 403) {
-              this.router.navigateByUrl('/login');
-            }
+            this.router.navigateByUrl('/login');
+          }
         }
         return Observable.toString();
       }) as any;
   }
-  }
+}
 

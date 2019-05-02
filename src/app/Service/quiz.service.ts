@@ -10,41 +10,46 @@ import {QuizAnswer} from "../Model/QuizAnswer";
 export class QuizService {
   host2: string = "http://localhost:8080";
 
-  constructor(private http:HttpClient){
+  constructor(private http: HttpClient) {
 
   }
 
-  createQuiz(quiz:Quiz){
+  createQuiz(quiz: Quiz) {
 
-    return this.http.post<Quiz>(this.host2+'/quiz', quiz)
-  }
-  getLastQuiz(){
-    return this.http.get<Quiz>(this.host2+'/lastquiz');
+    return this.http.post<Quiz>(this.host2 + '/quiz', quiz)
   }
 
-  isQuizName(name:string){
-    return this.http.get<string>(this.host2+'/isquizname/'+name);
-  }
-  getQuizbyId(id:number){
-    return this.http.get<Question[]>(this.host2+'/quiz/'+id);
-  }
-  getAll(){
-    return this.http.get<Quiz[]> (this.host2+'/quiz')
-  }
-  deleteQuiz(id:number){
-    return this.http.delete(this.host2+'/quiz/'+id);
+  getLastQuiz() {
+    return this.http.get<Quiz>(this.host2 + '/lastquiz');
   }
 
-  submitQuiz(quizDTO: any,score:string){
-    return this.http.post(this.host2 + '/quiz/'+ quizDTO.id+'/'+score, quizDTO.answers);
-  }
-  findQuizAnswerByQuizUser(id:number){
-    return this.http.get<QuizAnswer[]>(this.host2+'/quizanswers/'+id);
-  }
-  getQuizby(id:number){
-    return this.http.get<Quiz>(this.host2+'/getquiz/'+id);
+  isQuizName(name: string) {
+    return this.http.get<string>(this.host2 + '/isquizname/' + name);
   }
 
+  getQuizbyId(id: number) {
+    return this.http.get<Question[]>(this.host2 + '/quiz/' + id);
+  }
+
+  getAll() {
+    return this.http.get<Quiz[]>(this.host2 + '/quiz')
+  }
+
+  deleteQuiz(id: number) {
+    return this.http.delete(this.host2 + '/quiz/' + id);
+  }
+
+  submitQuiz(quizDTO: any, score: string) {
+    return this.http.post(this.host2 + '/quiz/' + quizDTO.id + '/' + score, quizDTO.answers);
+  }
+
+  findQuizAnswerByQuizUser(id: number) {
+    return this.http.get<QuizAnswer[]>(this.host2 + '/quizanswers/' + id);
+  }
+
+  getQuizby(id: number) {
+    return this.http.get<Quiz>(this.host2 + '/getquiz/' + id);
+  }
 
 
 }

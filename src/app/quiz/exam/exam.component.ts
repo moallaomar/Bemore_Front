@@ -14,7 +14,7 @@ import {AnswerService} from "../../Service/answer.service";
   styleUrls: ['./exam.component.css']
 })
 export class ExamComponent implements OnInit {
-  score: number = 0 ;
+  score: number = 0;
   mode = 'quiz';
   quiz: Quiz = new Quiz();
   config: QuizConfig = {
@@ -61,29 +61,8 @@ export class ExamComponent implements OnInit {
       })
     ).subscribe(quiz => {
       if (quiz == null) {
-
         this.router.navigate(['/dashboard'])
       } else {
-
-
-        /*        this.mode = 'result'
-
-                this.quizService.findQuizAnswerByQuizUser(this.quiz.id).subscribe(data => {
-                  this.quizAnswer = data;
-                    data.forEach(data => {
-                      this.questions.push(data.question);
-                      this.answerArray.push(data.selectedAnswer)
-                    })
-                  console.log(this.questions);
-                  console.log(this.answerArray);
-                  let answers = [];
-                  this.questions.forEach(question => {
-                    let selected = this.answerArray.find(answer => answer.correct);
-                    answers.push({ 'questionId': question.id, 'answered': (selected ? selected.id : null) });
-                  });
-                });
-        */
-
         this.questions = quiz;
         this.pager.count = this.questions.length;
         this.startTime = new Date();
@@ -92,8 +71,6 @@ export class ExamComponent implements OnInit {
         }, 1000);
         this.duration = this.parseTime(this.config.duration);
         this.mode = 'quiz';
-
-
       }
 
     });
@@ -156,13 +133,13 @@ export class ExamComponent implements OnInit {
       let selected = question.answers.find(answer => answer.selected);
       answers.push({'questionId': question.id, 'answered': (selected ? selected.id : null)});
     });
-let last: any
+    let last: any
     answers.forEach(elem => {
       if (elem.answered != null) {
 
         this.answerService.findAnswerById(elem.answered).subscribe(data => {
           if (data.correct) {
-          this.score++;
+            this.score++;
             localStorage.setItem("Score", this.score.toString());
           }
         })
@@ -173,7 +150,7 @@ let last: any
       return new Promise(resolve => setTimeout(resolve, milliseconds))
     }
     sleep(500).then(() => {
-      let x  =  localStorage.getItem("Score");
+      let x = localStorage.getItem("Score");
 
       localStorage.removeItem("Score");
       this.quizService.submitQuiz({id: this.quiz.id, answers: answers}, x.toString()).subscribe();

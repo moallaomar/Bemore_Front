@@ -42,7 +42,6 @@ export class ListQuizComponent implements OnInit , OnDestroy, AfterViewInit {
     this.quizService.getAll().subscribe(data => {
       this.quizes = data;
       this.filtredQuiz = this.performFilter(this.listFilter);
-
     });
   }
   ngOnDestroy(): void {
