@@ -27,6 +27,9 @@ export class AnswerService {
   deleteById(id:number){
     return this.http.delete<String>(this.host2+'/answer/'+id);
   }
+  findAnswerById(id:number){
+    return this.http.get<Answer>(this.host2+'/answers/'+id);
+  }
 
 
 }

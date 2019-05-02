@@ -35,8 +35,8 @@ export class QuizService {
     return this.http.delete(this.host2+'/quiz/'+id);
   }
 
-  submitQuiz(quizDTO: any){
-    return this.http.post(this.host2 + '/quiz/'+ quizDTO.id, quizDTO.answers);
+  submitQuiz(quizDTO: any,score:string){
+    return this.http.post(this.host2 + '/quiz/'+ quizDTO.id+'/'+score, quizDTO.answers);
   }
   findQuizAnswerByQuizUser(id:number){
     return this.http.get<QuizAnswer[]>(this.host2+'/quizanswers/'+id);

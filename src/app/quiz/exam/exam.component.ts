@@ -6,7 +6,7 @@ import {Quiz} from "../../Model/Quiz.model";
 import {Question} from "../../Model/question.model";
 import {QuizConfig} from "../../Model/quiz-config";
 import {Answer} from "../../Model/answer.model";
-import select = d3.select;
+import {AnswerService} from "../../Service/answer.service";
 
 @Component({
   selector: 'app-exam',
@@ -14,14 +14,14 @@ import select = d3.select;
   styleUrls: ['./exam.component.css']
 })
 export class ExamComponent implements OnInit {
-score:number = 0 ;
+  score: number = 0 ;
   mode = 'quiz';
   quiz: Quiz = new Quiz();
   config: QuizConfig = {
     'allowBack': true,
     'allowReview': true,
     'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 60,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    'duration': 20,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
     'pageSize': 1,
     'requiredAll': false,  // indicates if you must answer all the questions before submitting.
     'richText': true,
@@ -38,13 +38,13 @@ score:number = 0 ;
   };
   timer: any = null;
   startTime: Date;
-  name:string;
+  name: string;
   endTime: Date;
   ellapsedTime = '00:00';
   duration = '';
   private questions: Question[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private quizService: QuizService, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute, private quizService: QuizService, private router: Router, private answerService: AnswerService) {
   }
 
   get filteredQuestions() {
@@ -56,14 +56,14 @@ score:number = 0 ;
     this.activatedRoute.paramMap.pipe(
       switchMap(params => {
         const id = +params.get("id");
-      this.quiz.id = id;
+        this.quiz.id = id;
         return this.quizService.getQuizbyId(id)// http request
       })
     ).subscribe(quiz => {
       if (quiz == null) {
 
         this.router.navigate(['/dashboard'])
-      }else {
+      } else {
 
 
         /*        this.mode = 'result'
@@ -140,6 +140,7 @@ score:number = 0 ;
     }
   }
 
+
   isAnswered(question: Question) {
     return question.answers.find(x => x.selected) ? 'Répondu' : 'Pas répondu';
   };
@@ -155,26 +156,31 @@ score:number = 0 ;
       let selected = question.answers.find(answer => answer.selected);
       answers.push({'questionId': question.id, 'answered': (selected ? selected.id : null)});
     });
-
-    this.quizService.submitQuiz({id: this.quiz.id, answers: answers}).subscribe();
-
+let last: any
     answers.forEach(elem => {
-      this.questions.forEach(el => {
-        el.answers.forEach(e => {
-          let selected = el.answers.find(answer => answer.selected);
-          if (elem.answered == null){
-            elem.answered = 0;
-          }
-          if (elem.answered != 0){
+      if (elem.answered != null) {
 
+        this.answerService.findAnswerById(elem.answered).subscribe(data => {
+          if (data.correct) {
+          this.score++;
+            localStorage.setItem("Score", this.score.toString());
           }
         })
-      })
+
+      }
     });
+    const sleep = (milliseconds) => {
+      return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+    sleep(500).then(() => {
+      let x  =  localStorage.getItem("Score");
+
+      localStorage.removeItem("Score");
+      this.quizService.submitQuiz({id: this.quiz.id, answers: answers}, x.toString()).subscribe();
+      this.mode = 'result'
+
+    })
 
 
-
-
-    this.mode = 'result'
   }
 }

@@ -40,6 +40,7 @@ username: string[] = [];
 
     this.quizUserService.findAll().subscribe(data => {
       this.quizUsers = data;
+
       this.filtredQuizUser = this.performFilter(this.listFilter);
     });
   }

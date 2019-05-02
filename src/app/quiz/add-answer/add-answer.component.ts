@@ -39,6 +39,7 @@ export class AddAnswerComponent implements OnInit {
   }
   addAnswer(newAnswer: string) {
     if (newAnswer) {
+      Answer : this.answer = new Answer();
       this.answer.content = newAnswer.toString();
       this.answerService.getLastId().subscribe(data => {
         this.answer.id = data + 1

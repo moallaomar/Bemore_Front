@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {AddQuizComponent} from './add-quiz/add-quiz.component';
 import {QuizRoutes} from "./quiz.routing";
 import {CustomFormsModule} from "ng2-validation";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {CommonModule} from "@angular/common";
+import {CommonModule, registerLocaleData} from "@angular/common";
 import {NgSelectizeModule} from "ng-selectize";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ArchwizardModule} from "angular-archwizard";
@@ -24,8 +24,9 @@ import {AuthInterceptor} from "../Service/auth.interceptor";
 import {MinuteSecondsPipe} from "./Util/MinuteSecondsPipe";
 import {ListQuizuserComponent} from "./list-quizuser/list-quizuser.component";
 import {QuizUserService} from "../Service/quizuser.service";
+import localeFr from '@angular/common/locales/fr'
 
-
+registerLocaleData(localeFr, 'fr');
 @NgModule({
   imports: [
     RouterModule.forChild(QuizRoutes),
@@ -50,6 +51,7 @@ import {QuizUserService} from "../Service/quizuser.service";
     ListQuizuserComponent,
   ],
   providers: [QuestionService,QuizService, AnswerService, QuizUserService,
+    {provide: LOCALE_ID, useValue: 'fr' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
