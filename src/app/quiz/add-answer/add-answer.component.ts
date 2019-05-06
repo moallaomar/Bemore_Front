@@ -9,6 +9,7 @@ import {AnswerService} from "../../Service/answer.service";
 @Component({
   selector: 'app-add-answer',
   templateUrl: './add-answer.component.html',
+  styleUrls: ['./add-answer.component.css']
 })
 export class AddAnswerComponent implements OnInit {
 
@@ -16,6 +17,10 @@ export class AddAnswerComponent implements OnInit {
   question: Question = new Question();
   answer: Answer = new Answer();
   answers: Answer[] = [];
+  color = 'primary';
+
+  content: string;
+  correct: boolean;
 
   constructor(private activatedRoute: ActivatedRoute, private questionService: QuestionService, private answerService: AnswerService) {
   }
@@ -31,6 +36,7 @@ export class AddAnswerComponent implements OnInit {
       this.question = question;
       this.answers = question.answers;
     });
+
   }
 
   setTrue() {
@@ -41,16 +47,26 @@ export class AddAnswerComponent implements OnInit {
     this.answer.correct = false;
   }
 
-  addAnswer(newAnswer: string) {
-    if (newAnswer) {
+  addAnswer(data) {
+    if (data) {
+      console.log(data);
       Answer : this.answer = new Answer();
-      this.answer.content = newAnswer.toString();
+      this.answer.content = data.content;
+      this.answer.correct = data.correct;
       this.answerService.getLastId().subscribe(data => {
         this.answer.id = data + 1
       });
       this.answers.push(this.answer);
       this.answerService.saveAnswer(this.answer, this.question.id).subscribe();
     }
+  }
+
+  isCorrect(id: number) {
+    this.answerService.isCorrect(id).subscribe();
+  }
+
+  isIncorrect(id: number) {
+    this.answerService.isIncorrect(id).subscribe();
   }
 
   deleteAnswer(answer: Answer) {

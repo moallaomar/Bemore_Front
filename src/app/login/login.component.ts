@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators,} from "@angular/forms";
 import {AuthenticationService} from "../Service/authentication.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onLogin(data) {
+  onLogin(data){
 
     this.submitted = true;
     this.authService.login(data)
@@ -41,11 +42,9 @@ export class LoginComponent implements OnInit {
 
         this.authService.saveToken(jwt);
         this.router.navigateByUrl('/dashboard')
-      }, error1 => {
-        console.log("erreur");
-        this.mode = 1;
-      })
+      },error1 => {console.log("error",error1)});
 
+    this.mode = 1 ;
 
   }
 

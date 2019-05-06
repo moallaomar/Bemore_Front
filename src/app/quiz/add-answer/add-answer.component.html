@@ -8,35 +8,37 @@
             <H2> Veuillez saisir les réponses pour la question :  {{question.content}}  </H2>
 
 
-            <form class="mrg-top-40">
+            <form class="mrg-top-40" #a="ngForm" (ngSubmit)="addAnswer(a.value)">
               <div class="row">
                 <div class="col-md-10 ml-auto mr-auto">
 
                   <div class="row">
                     <div class="form-inline">
                       <div class="d-inline p-2">
-                        <input #newAnswer (keyup.enter)="addAnswer(newAnswer.value)"
+                        <input [(ngModel)]="content" name="content"
                                class="form-control mr-1"
                         />
                       </div>
 
                       <div class="d-inline p-2">
-                        <div [(ngModel)]="model" class="btn-group btn-group-toggle" name="radioBasic" ngbRadioGroup>
+                        <div [(ngModel)]="correct" class="btn-group btn-group-toggle" name="correct" ngbRadioGroup>
                           <label class="btn-info btn-sm" ngbButtonLabel>
-                            <input (click)="setTrue()" ngbButton type="radio" value=1>Correct
+                            <input (click)="setTrue()" ngbButton type="radio" value=true>Correct
                           </label>
                           <label class="btn-info btn-sm" ngbButtonLabel>
-                            <input (click)="setFalse()" ngbButton type="radio"> Incorrect
+                            <input (click)="setFalse()" ngbButton type="radio" value=false> Incorrect
                           </label>
 
                         </div>
                       </div>
                       <div class="d-inline p-2">
-                        <button (click)="addAnswer(newAnswer.value)" class="btn btn-info">Ajouter une réponse</button>
+                        <button type="submit" class="btn btn-info">Ajouter une réponse</button>
                       </div>
                     </div>
                   </div>
-
+                </div>
+              </div>
+            </form>
 
                   <div *ngFor="let ans of answers ;let idx = index" class="row">
                     <div class="d-inline p-2">
@@ -46,15 +48,29 @@
                       <button (click)="deleteAnswer(ans)" class="btn-info btn-sm" type="button">Supprimer</button>
                     </div>
                     <div class="d-inline p-2">
-                      <div [(ngModel)]="ans.correct" class="btn-group btn-group-toggle" name="radioBasic" ngbRadioGroup>
-                        <label class="btn-info btn-sm" ngbButtonLabel>
-                          <input ngbButton type="radio" value="{{ans.correct}}">Correct
-                        </label>
-                        <label class="btn-info btn-sm" ngbButtonLabel>
-                          <input ngbButton type="radio" value="{{ans.correct}}"> Incorrect
-                        </label>
 
-                      </div>
+
+                      <mat-slide-toggle
+                        class="example-margin"
+                        [color]="color"
+                        [(ngModel)]="ans.correct">
+                      </mat-slide-toggle>
+
+                      <!--    <div [(ngModel)]="ans.correct" class="btn-group btn-group-toggle" ngbRadioGroup>
+                            <label class="btn-info btn-sm" ngbButtonLabel>
+
+                              <input ngbButton type="radio" name="radio1" value="{{ans.correct.toString()}}"  [value]="true"  (click)="isCorrect(ans.id)">Correct
+                            </label>
+                            <label class="btn-info btn-sm" ngbButtonLabel>
+                              <input ngbButton type="radio"  name="radio2" value="{{ans.correct.toString()}}"  [value]="false" (click)="isIncorrect(ans.id)"> Incorrect
+                            </label>
+
+
+                          </div>
+                          -->
+
+
+
                     </div>
 
 
@@ -62,11 +78,9 @@
 
                 </div>
               </div>
-            </form>
+
 
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>

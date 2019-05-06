@@ -31,8 +31,8 @@
               "./node_modules/selectize/dist/css/selectize.default.css",
               "./node_modules/fullcalendar/dist/fullcalendar.min.css",
               "./node_modules/nvd3/build/nv.d3.css",
-              "src/assets/scss/app.scss"
-             // "./node_modules/bootstrap/dist/css/bootstrap.css"
+              "src/assets/scss/app.scss",
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
             ],
             "scripts": [
               "./node_modules/pace-js/pace.min.js",
@@ -42,7 +42,9 @@
               "./node_modules/datatables.net/js/jquery.dataTables.js",
               "./node_modules/ng-selectize/selectize/selectize.standalone.js",
               "./node_modules/imagesloaded/imagesloaded.pkgd.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+              "./node_modules/hammerjs/hammer.js"
+
             ]
           },
           "configurations": {

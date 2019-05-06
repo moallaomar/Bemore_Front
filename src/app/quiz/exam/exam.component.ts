@@ -21,7 +21,7 @@ export class ExamComponent implements OnInit {
     'allowBack': true,
     'allowReview': true,
     'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 20,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    'duration': 120,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
     'pageSize': 1,
     'requiredAll': false,  // indicates if you must answer all the questions before submitting.
     'richText': true,
@@ -139,6 +139,7 @@ export class ExamComponent implements OnInit {
 
         this.answerService.findAnswerById(elem.answered).subscribe(data => {
           if (data.correct) {
+
             this.score++;
             localStorage.setItem("Score", this.score.toString());
           }
@@ -151,9 +152,14 @@ export class ExamComponent implements OnInit {
     }
     sleep(500).then(() => {
       let x = localStorage.getItem("Score");
-
-      localStorage.removeItem("Score");
-      this.quizService.submitQuiz({id: this.quiz.id, answers: answers}, x.toString()).subscribe();
+      if (x == null) {
+        x = '0';
+        localStorage.removeItem("Score");
+        this.quizService.submitQuiz({id: this.quiz.id, answers: answers}, x).subscribe();
+      } else {
+        localStorage.removeItem("Score");
+        this.quizService.submitQuiz({id: this.quiz.id, answers: answers}, x.toString()).subscribe();
+      }
       this.mode = 'result'
 
     })

@@ -24,6 +24,7 @@ import {MinuteSecondsPipe} from "./Util/MinuteSecondsPipe";
 import {ListQuizuserComponent} from "./list-quizuser/list-quizuser.component";
 import {QuizUserService} from "../Service/quizuser.service";
 import localeFr from '@angular/common/locales/fr'
+import {MatSlideToggleModule} from "@angular/material";
 
 registerLocaleData(localeFr, 'fr');
 
@@ -40,6 +41,7 @@ registerLocaleData(localeFr, 'fr');
     CustomFormsModule,
     JwBootstrapSwitchNg2Module,
     DataTablesModule,
+    MatSlideToggleModule,
   ],
   declarations: [
     AddQuizComponent,

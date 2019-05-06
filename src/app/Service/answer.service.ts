@@ -33,5 +33,13 @@ export class AnswerService {
     return this.http.get<Answer>(this.host2 + '/answers/' + id);
   }
 
+  isCorrect(id: number) {
+    return this.http.post(this.host2 + '/answer/iscorrect/' + id, null);
+  }
+
+  isIncorrect(id: number) {
+    return this.http.post(this.host2 + '/answer/isincorrect/' + id, null);
+  }
+
 
 }

@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpBackend, HttpClient} from "@angular/common/http";
+import {HttpBackend, HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {User} from "../Model/user_model";
 import {UserForm} from "../Model/UserForm";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +30,11 @@ export class AuthenticationService {
     return this.httpClient.post<UserForm>(this.host2 + "/register", data)
   }
 
-  login(data) {
+  login(data):Observable<any> {
 
     return this.http.post(this.host2 + "/login", data, {observe: 'response'});
   }
+
 
   saveToken(jwt: string) {
     this.jwt = jwt;
