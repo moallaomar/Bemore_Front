@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Answer} from "../Model/answer.model";
 
 @Injectable({
@@ -33,13 +33,12 @@ export class AnswerService {
     return this.http.get<Answer>(this.host2 + '/answers/' + id);
   }
 
-  isCorrect(id: number) {
-    return this.http.post(this.host2 + '/answer/iscorrect/' + id, null);
+  isCorrect(id: number, correct:boolean) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post(this.host2 + '/answer/iscorrect/' + id, correct, httpOptions);
   }
-
-  isIncorrect(id: number) {
-    return this.http.post(this.host2 + '/answer/isincorrect/' + id, null);
-  }
-
-
 }

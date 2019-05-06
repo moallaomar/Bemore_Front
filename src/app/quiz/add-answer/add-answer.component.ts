@@ -5,6 +5,7 @@ import {switchMap} from "rxjs/operators";
 import {Question} from "../../Model/question.model";
 import {Answer} from "../../Model/answer.model";
 import {AnswerService} from "../../Service/answer.service";
+import {MatSlideToggleChange} from "@angular/material";
 
 @Component({
   selector: 'app-add-answer',
@@ -38,7 +39,6 @@ export class AddAnswerComponent implements OnInit {
     });
 
   }
-
   setTrue() {
     this.answer.correct = true;
   }
@@ -61,13 +61,11 @@ export class AddAnswerComponent implements OnInit {
     }
   }
 
-  isCorrect(id: number) {
-    this.answerService.isCorrect(id).subscribe();
+  isCorrect(id: number ,event: MatSlideToggleChange) {
+    this.answerService.isCorrect(id,event.checked).subscribe();
   }
 
-  isIncorrect(id: number) {
-    this.answerService.isIncorrect(id).subscribe();
-  }
+
 
   deleteAnswer(answer: Answer) {
     for (var i = 0; i < this.answers.length; i++) {

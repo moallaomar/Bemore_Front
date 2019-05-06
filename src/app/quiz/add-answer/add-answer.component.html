@@ -53,7 +53,8 @@
                       <mat-slide-toggle
                         class="example-margin"
                         [color]="color"
-                        [(ngModel)]="ans.correct">
+                        [(ngModel)]="ans.correct"
+                        (change)="isCorrect(ans.id,$event)">
                       </mat-slide-toggle>
 
                       <!--    <div [(ngModel)]="ans.correct" class="btn-group btn-group-toggle" ngbRadioGroup>
