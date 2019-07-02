@@ -1,6 +1,5 @@
 import {Routes} from '@angular/router';
 import {LoginComponent} from "./login.component";
-import {SignupComponent} from "./signup/signup.component";
 
 //Dashboard Components
 
@@ -14,13 +13,13 @@ export const LoginRoutes: Routes = [
       title: 'Login'
     }
   },
-  {
+ /* {
     path: 'signup',
     component: SignupComponent,
     data: {
       title: 'Inscription'
     }
-  }
+  } */
 
 ];
 

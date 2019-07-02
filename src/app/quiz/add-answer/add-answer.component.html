@@ -2,21 +2,20 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card">
+        <div class="card-heading border bottom">
+          <h4 class="card-title">Veuillez saisir les réponses pour la question :  {{question.content}} </h4>
+        </div>
         <div class="card-block">
           <div class="table-overflow">
-
-            <H2> Veuillez saisir les réponses pour la question :  {{question.content}}  </H2>
-
-
-            <form class="mrg-top-40" #a="ngForm" (ngSubmit)="addAnswer(a.value)">
+            <form #a="ngForm" (ngSubmit)="addAnswer(a.value)" class="mrg-top-40">
               <div class="row">
                 <div class="col-md-10 ml-auto mr-auto">
 
                   <div class="row">
                     <div class="form-inline">
                       <div class="d-inline p-2">
-                        <input [(ngModel)]="content" name="content"
-                               class="form-control mr-1"
+                        <input [(ngModel)]="content" class="form-control mr-1"
+                               name="content"
                         />
                       </div>
 
@@ -32,7 +31,7 @@
                         </div>
                       </div>
                       <div class="d-inline p-2">
-                        <button type="submit" class="btn btn-info">Ajouter une réponse</button>
+                        <button class="btn btn-info" type="submit">Ajouter une réponse</button>
                       </div>
                     </div>
                   </div>
@@ -40,48 +39,47 @@
               </div>
             </form>
 
-                  <div *ngFor="let ans of answers ;let idx = index" class="row">
-                    <div class="d-inline p-2">
-                      <label>{{ans.content}}</label>
-                    </div>
-                    <div class="d-inline p-2">
-                      <button (click)="deleteAnswer(ans)" class="btn-info btn-sm" type="button">Supprimer</button>
-                    </div>
-                    <div class="d-inline p-2">
+            <div *ngFor="let ans of answers ;let idx = index" class="row">
+              <div class="d-inline p-2">
+                <label>{{ans.content}}</label>
+              </div>
+              <div class="d-inline p-2">
+                <button (click)="deleteAnswer(ans)" class="btn-info btn-sm" type="button">Supprimer</button>
+              </div>
+              <div class="d-inline p-2">
 
 
-                      <mat-slide-toggle
-                        class="example-margin"
-                        [color]="color"
-                        [(ngModel)]="ans.correct"
-                        (change)="isCorrect(ans.id,$event)">
-                      </mat-slide-toggle>
+                <mat-slide-toggle
+                  (change)="isCorrect(ans.id,$event)"
+                  [(ngModel)]="ans.correct"
+                  [color]="color"
+                  class="example-margin">
+                </mat-slide-toggle>
 
-                      <!--    <div [(ngModel)]="ans.correct" class="btn-group btn-group-toggle" ngbRadioGroup>
-                            <label class="btn-info btn-sm" ngbButtonLabel>
+                <!--    <div [(ngModel)]="ans.correct" class="btn-group btn-group-toggle" ngbRadioGroup>
+                      <label class="btn-info btn-sm" ngbButtonLabel>
 
-                              <input ngbButton type="radio" name="radio1" value="{{ans.correct.toString()}}"  [value]="true"  (click)="isCorrect(ans.id)">Correct
-                            </label>
-                            <label class="btn-info btn-sm" ngbButtonLabel>
-                              <input ngbButton type="radio"  name="radio2" value="{{ans.correct.toString()}}"  [value]="false" (click)="isIncorrect(ans.id)"> Incorrect
-                            </label>
-
-
-                          </div>
-                          -->
-
+                        <input ngbButton type="radio" name="radio1" value="{{ans.correct.toString()}}"  [value]="true"  (click)="isCorrect(ans.id)">Correct
+                      </label>
+                      <label class="btn-info btn-sm" ngbButtonLabel>
+                        <input ngbButton type="radio"  name="radio2" value="{{ans.correct.toString()}}"  [value]="false" (click)="isIncorrect(ans.id)"> Incorrect
+                      </label>
 
 
                     </div>
+                    -->
 
 
-                  </div>
-
-                </div>
               </div>
 
 
+            </div>
+
           </div>
         </div>
+
+
       </div>
     </div>
+  </div>
+</div>

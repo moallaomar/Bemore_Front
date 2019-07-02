@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {switchMap} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
-import {QuizService} from "../../Service/quiz.service";
-import {Quiz} from "../../Model/Quiz.model";
-import {Question} from "../../Model/question.model";
-import {QuizConfig} from "../../Model/quiz-config";
-import {Answer} from "../../Model/answer.model";
-import {AnswerService} from "../../Service/answer.service";
+import {QuizService} from "../Service/quiz.service";
+import {Quiz} from "../Model/Quiz.model";
+import {Question} from "../Model/question.model";
+import {QuizConfig} from "../Model/quiz-config";
+import {Answer} from "../Model/answer.model";
+import {AnswerService} from "../Service/answer.service";
 
 @Component({
   selector: 'app-exam',
@@ -15,6 +15,7 @@ import {AnswerService} from "../../Service/answer.service";
 })
 export class ExamComponent implements OnInit {
   score: number = 0;
+  language: boolean = false;
   mode = 'quiz';
   quiz: Quiz = new Quiz();
   config: QuizConfig = {
@@ -39,7 +40,6 @@ export class ExamComponent implements OnInit {
   timer: any = null;
   startTime: Date;
   name: string;
-  endTime: Date;
   ellapsedTime = '00:00';
   duration = '';
   private questions: Question[] = [];
@@ -98,6 +98,7 @@ export class ExamComponent implements OnInit {
     return `${mins}:${secs}`;
   }
 
+
   onSelect(question: Question, answer: Answer) {
 
     question.answers.forEach((x) => {
@@ -117,6 +118,13 @@ export class ExamComponent implements OnInit {
     }
   }
 
+  modeFr() {
+this.language = true;
+  }
+
+  modeEn() {
+this.language = false ;
+  }
 
   isAnswered(question: Question) {
     return question.answers.find(x => x.selected) ? 'Répondu' : 'Pas répondu';
@@ -160,10 +168,8 @@ export class ExamComponent implements OnInit {
         localStorage.removeItem("Score");
         this.quizService.submitQuiz({id: this.quiz.id, answers: answers}, x.toString()).subscribe();
       }
-      this.mode = 'result'
+      this.router.navigate(['/dashboard']);
 
     })
-
-
   }
 }

@@ -17,6 +17,9 @@ import {AppRoutes} from './app.routing';
 import {AppComponent} from './app.component';
 import {LoginModule} from './login/login.module';
 import {QuizModule} from "./quiz/quiz.modules";
+import {ExamComponent} from "./exam/exam.component";
+import {MinuteSecondsPipe} from "./Util/MinuteSecondsPipe";
+import {ToastyModule} from "ng2-toasty";
 
 @NgModule({
   imports: [
@@ -28,12 +31,17 @@ import {QuizModule} from "./quiz/quiz.modules";
     HttpClientModule,
     LoginModule,
     QuizModule,
+
   ],
+  exports: [BrowserModule, ToastyModule],
   declarations: [
     AppComponent,
     CommonLayoutComponent,
     AuthenticationLayoutComponent,
     Sidebar_Directives,
+    ExamComponent,
+    MinuteSecondsPipe,
+
 
   ],
   providers: [],

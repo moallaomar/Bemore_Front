@@ -8,7 +8,7 @@
 
     <div [ngClass]="sidenavSelected">
       <!-- Side Nav START -->
-      <div class="side-nav" sideBar>
+      <div class="side-nav" sideBar *ngIf="examMode == 0">
         <div class="side-nav-inner">
           <div class="side-nav-logo">
             <a [routerLink]="['/dashboard']" href="">
@@ -51,6 +51,14 @@
                                     <i class="ti-stats-up"></i>
                                 </span>
                 <span class="title">Afficher les résultat</span>
+              </a>
+            </li>
+            <li *ngIf="isAdmin()" clas="nav-item" routerLinkActive="active">
+              <a *ngIf="isUser()" [routerLink]="['/quiz/add-user']" class="mrg-top-30" href="">
+                                <span class="icon-holder">
+                                    <i class="ti-user"></i>
+                                </span>
+                <span class="title">Ajouter un utilisateur</span>
               </a>
             </li>
 

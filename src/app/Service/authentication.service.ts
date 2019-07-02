@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpBackend, HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpBackend, HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {User} from "../Model/user_model";
 import {UserForm} from "../Model/UserForm";
@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class AuthenticationService {
+
   redirectUrl: String;
   currentUser: User;
   host2: string = "http://localhost:8080";
@@ -25,16 +26,26 @@ export class AuthenticationService {
     return !!this.currentUser;
   }
 
+
+
   register(data) {
     console.log(data);
-    return this.httpClient.post<UserForm>(this.host2 + "/register", data)
+  /*  var headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers }); */
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      })
+    };
+    return this.httpClient.post<UserForm>(this.host2 + "/register", data, httpOptions)
   }
 
   login(data):Observable<any> {
 
     return this.http.post(this.host2 + "/login", data, {observe: 'response'});
   }
-
 
   saveToken(jwt: string) {
     this.jwt = jwt;

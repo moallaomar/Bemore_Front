@@ -1,0 +1,77 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-heading border bottom">
+          <h4 class="card-title">Ajouter un Candidat</h4>
+        </div>
+        <div class="card-block">
+          <div class="mrg-top-40">
+            <div class="row">
+              <div class="col-md-8 ml-auto mr-auto">
+                <form #v="ngForm" (ngSubmit)="signup(v.value)"
+                      [formGroup]="signupForm" class="needs-validation">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Login</label>
+                        <input [(ngModel)]="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                               class="form-control" formControlName="username"
+                               name="username"
+                               ngModel=""
+                               placeholder="Login"
+                               type="text">
+                        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                          <div *ngIf="f.username.errors?.required">Veuillez saisir le login</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input [(ngModel)]="password"
+                               [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                               class="form-control" formControlName="password"
+                               name="password"
+                               ngModel=""
+                               placeholder="Mot de passe"
+                               type="password">
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                          <div *ngIf="f.password.errors?.required">Veuillez saisir le mot de passe</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Confirmer le mot de passe</label>
+                        <input [(ngModel)]="confirmedPassword"
+                               [ngClass]="{ 'is-invalid': submitted && f.confirmedPassword.errors }"
+                               class="form-control"
+                               formControlName="confirmedPassword" placeholder="Confirmer le mot de passe"
+                               type="password">
+                        <div *ngIf="submitted && f.confirmedPassword.errors" class="invalid-feedback">
+                          <div *ngIf="f.confirmedPassword.errors.required">Veuillez confirmer votre mot de passe
+                          </div>
+                          <div *ngIf="f.confirmedPassword.errors.mustMatch">Les mots de passe doivent concorder
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mrg-top-20 text-right">
+                    <button class="btn btn-info" type="submit">Créer</button>
+                    <ng2-toasty></ng2-toasty>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

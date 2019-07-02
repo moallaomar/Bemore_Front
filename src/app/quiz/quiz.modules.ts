@@ -14,17 +14,18 @@ import {AddAnswerComponent} from "./add-answer/add-answer.component";
 import {JwBootstrapSwitchNg2Module} from "jw-bootstrap-switch-ng2";
 import {ListQuizComponent} from "./list-quiz/list-quiz.component";
 import {DataTablesModule} from "angular-datatables";
-import {ExamComponent} from "./exam/exam.component";
 import {QuestionService} from "../Service/question.service";
 import {QuizService} from "../Service/quiz.service";
 import {AnswerService} from "../Service/answer.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "../Service/auth.interceptor";
-import {MinuteSecondsPipe} from "./Util/MinuteSecondsPipe";
+import {MinuteSecondsPipe} from "../Util/MinuteSecondsPipe";
 import {ListQuizuserComponent} from "./list-quizuser/list-quizuser.component";
 import {QuizUserService} from "../Service/quizuser.service";
 import localeFr from '@angular/common/locales/fr'
 import {MatSlideToggleModule} from "@angular/material";
+import {AddUserComponent} from "./add-user/add-user.component";
+import {ToastyModule} from "ng2-toasty";
 
 registerLocaleData(localeFr, 'fr');
 
@@ -42,14 +43,14 @@ registerLocaleData(localeFr, 'fr');
     JwBootstrapSwitchNg2Module,
     DataTablesModule,
     MatSlideToggleModule,
+    ToastyModule.forRoot()
   ],
   declarations: [
     AddQuizComponent,
     AddQuestionComponent,
     AddAnswerComponent,
     ListQuizComponent,
-    ExamComponent,
-    MinuteSecondsPipe,
+    AddUserComponent,
     ListQuizuserComponent,
   ],
   providers: [QuestionService, QuizService, AnswerService, QuizUserService,

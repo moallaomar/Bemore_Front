@@ -57,7 +57,7 @@ export class DashboardComponent {
       if (quiz == null) {
         this.display = true;
       } else {
-        this.router.navigate(['/quiz/exam/', data])
+        this.router.navigate(['/exam/', data])
       }
     });
   }

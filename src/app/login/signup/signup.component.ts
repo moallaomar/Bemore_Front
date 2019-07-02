@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+/*import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {MustMatch} from "./mustmatch";
+import {MustMatch} from "../../quiz/add-user/mustmatch";
 import {AuthenticationService} from "../../Service/authentication.service";
 import {UserForm} from "../../Model/UserForm";
 
@@ -55,3 +55,4 @@ export class SignupComponent implements OnInit {
     }
   }
 }
+*/

@@ -4,8 +4,9 @@ import {AddQuizComponent} from './add-quiz/add-quiz.component';
 import {AddQuestionComponent} from "./add-question/add-question.component";
 import {AddAnswerComponent} from "./add-answer/add-answer.component";
 import {ListQuizComponent} from "./list-quiz/list-quiz.component";
-import {ExamComponent} from "./exam/exam.component";
+import {ExamComponent} from "../exam/exam.component";
 import {ListQuizuserComponent} from "./list-quizuser/list-quizuser.component";
+import {AddUserComponent} from "./add-user/add-user.component";
 
 export const QuizRoutes: Routes = [
   {
@@ -26,6 +27,13 @@ export const QuizRoutes: Routes = [
         }
       },
       {
+        path: 'add-user',
+        component: AddUserComponent,
+        data: {
+          title: 'Ajouter un Utilisateur'
+        }
+      },
+      {
         path: 'add-answer/:id',
         component: AddAnswerComponent,
         data: {
@@ -37,13 +45,6 @@ export const QuizRoutes: Routes = [
         component: ListQuizComponent,
         data: {
           title: 'Gèrer les tests'
-        }
-      },
-      {
-        path: 'exam/:id',
-        component: ExamComponent,
-        data: {
-          title: 'Liste des exams'
         }
       },
       {

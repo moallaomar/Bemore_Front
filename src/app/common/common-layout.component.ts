@@ -26,7 +26,7 @@ export class CommonLayoutComponent implements OnInit {
   private user: User;
   private role: String;
   private currentUser: CurrentUser;
-
+  examMode : number = 0 ;
   constructor(private route: Router, private authService: AuthenticationService) {
     this.app = {
       layout: {

@@ -1,18 +1,19 @@
-<div class="container-fluid">
+<div class="container-fluid" >
 
   <h1 class="text-center font-weight-normal">{{name}}</h1>
-  <hr/>
-
 
   <div id="quiz">
     <hr/>
     <div *ngIf="mode=='quiz'">
       <div *ngFor="let question of filteredQuestions;">
         <div class="badge badge-info">Question {{pager.index + 1}} sur {{pager.count}}.</div>
+        <span (click)="modeFr()" class="flag-icon flag-icon-fr font-size-22 width-22"></span>
+        <span (click)="modeEn()" class="flag-icon flag-icon-gb font-size-22 width-20"></span>
         <div *ngIf="config.duration" class="badge badge-info float-right">Timer: {{ellapsedTime}}
           / {{config.duration | minuteSeconds }}</div>
         <h3 class="font-weight-normal">{{pager.index + 1}}.
-          <span [innerHTML]="question.content"></span>
+          <span *ngIf="language == false" [innerHTML]="question.content"></span>
+          <span *ngIf="language == true" [innerHTML]="question.content_fr"></span>
         </h3>
 
         <div class="row text-left options">
